@@ -51,11 +51,12 @@ async function Dropdown_OptionSettings(element) {
                 }
 
                 var Browser = await browser.runtime.getBrowserInfo();
-
+                var Platform = await browser.runtime.getPlatformInfo();
                 MicroModal.showError(
                     "Debug Info",
                     `Browser: ${Browser.name} (v${Browser.version})<br />
-                        Build: ${Browser.buildID}`
+                        Build: ${Browser.buildID}<br /><br />
+                        OS: ${Platform.os} (${Platform.arch})`
                 );
                 return;
             }
