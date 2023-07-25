@@ -36,6 +36,12 @@ async function insertContentsFromFiles() {
 
 window.onload = function () {
     console.log("Initialize home");
+
+    if (typeof browser !== "undefined") {
+        $("#dropdown-version")[0].innerHTML =
+            "v" + browser.runtime.getManifest().version;
+    }
+
     LoadItems();
     getClockTime();
     setInterval(getClockTime, 3000 * 15);

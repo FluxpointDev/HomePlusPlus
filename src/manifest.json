@@ -1,6 +1,6 @@
 {
     "name": "Home++ Beta",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "manifest_version": 3,
     "permissions": ["storage"],
     "optional_permissions": ["notifications", "topSites"],
