@@ -8,7 +8,7 @@
     "chrome_url_overrides": {
         "newtab": "pages/home.html"
     },
-    "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/borderify",
+    "homepage_url": "https://github.com/FluxpointDev/HomePlusPlus",
     "icons": {
         "48": "icons/Icon-48.png",
         "96": "icons/Icon-96.png"
