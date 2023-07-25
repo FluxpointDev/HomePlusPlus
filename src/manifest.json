@@ -6,7 +6,7 @@
     "optional_permissions": ["notifications", "topSites"],
     "description": "Bring the comfort of your home to your computer, customizeable home tab which is flexiable.",
     "chrome_url_overrides": {
-        "newtab": "pages/home.html"
+        "newtab": "root/home.html"
     },
     "homepage_url": "https://github.com/FluxpointDev/HomePlusPlus",
     "icons": {
@@ -14,7 +14,8 @@
         "96": "icons/Icon-96.png"
     },
     "options_ui": {
-        "page": "pages/options.html"
+        "page": "root/options.html",
+        "browser_style": false
     },
     "browser_specific_settings": {
         "gecko": {

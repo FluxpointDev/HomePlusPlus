@@ -20,6 +20,29 @@ function AddData() {
     }
 }
 
+document
+    .getElementById("nav-dropdown")
+    .addEventListener("click", (elm) => Dropdown_OptionSettings(elm.target));
+
+function Dropdown_OptionSettings(element) {
+    console.log("Dropdown clicked");
+    console.log(element);
+    switch (element.id) {
+        case "dropdown-settings":
+            {
+                if (typeof browser === "undefined") {
+                    MicroModal.showError(
+                        "Addon Error",
+                        "Addon has not been installed."
+                    );
+                    return;
+                }
+                browser.runtime.openOptionsPage();
+            }
+            break;
+    }
+}
+
 function ModalClose(data) {
     console.log("Modal close");
     console.log(data);

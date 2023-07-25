@@ -17,8 +17,8 @@
     color: #a1a2ab;
     padding: 5px;
     text-decoration: none;
-    text-align: center;
     margin-bottom: 4px;
+    cursor: pointer;
 }
 .dropdown-content a:hover {
     color: #ffffff;
