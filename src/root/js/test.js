@@ -24,7 +24,7 @@ document
     .getElementById("nav-dropdown")
     .addEventListener("click", (elm) => Dropdown_OptionSettings(elm.target));
 
-function Dropdown_OptionSettings(element) {
+async function Dropdown_OptionSettings(element) {
     console.log("Dropdown clicked");
     console.log(element);
     switch (element.id) {
@@ -38,6 +38,26 @@ function Dropdown_OptionSettings(element) {
                     return;
                 }
                 browser.runtime.openOptionsPage();
+            }
+            break;
+        case "dropdown-debug":
+            {
+                if (typeof browser === "undefined") {
+                    MicroModal.showError(
+                        "Addon Error",
+                        "Addon has not been installed."
+                    );
+                    return;
+                }
+
+                var Browser = await browser.runtime.getBrowserInfo();
+
+                MicroModal.showError(
+                    "Debug Info",
+                    `Browser: ${Browser.name} (v${Browser.version})<br />
+                        Build: ${Browser.buildID}`
+                );
+                return;
             }
             break;
     }
