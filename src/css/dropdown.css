@@ -1,0 +1,26 @@
+.settings-dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 6px;
+    padding-bottom: 2px;
+    border-radius: 6px;
+    width: 180px;
+    overflow: auto;
+    background-color: #2b2b36;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+.dropdown-content a {
+    display: block;
+    color: #a1a2ab;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 4px;
+}
+.dropdown-content a:hover {
+    color: #ffffff;
+    background-color: #485177;
+}

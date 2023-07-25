@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+#clock {
+    font-family: "Digital";
+}
+
+html {
+    background-repeat: no-repeat;
+background-size: cover !important;
+background-attachment: fixed !important;
+background-image: url('https://cdn.discordapp.com/attachments/625788123418198070/922603313436983306/ezgif.com-gif-maker.jpg'), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) !important;
+background-blend-mode: overlay !important;
+}
+
+header {
+    padding: 4px;;
+}
+.page-head {
+    background-color: rgba(51, 53, 71, 0.7);
+}
+.page-nav {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+}
+.page-body {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6px;
+    padding: 4px;
+}
+.navbar {
+    
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 0.6rem;
+}
+.navbar h3 {
+    vertical-align: center;
+    display: inline-block;
+}
+.navbar li {
+    font-size: 14.5px;
+    position: relative;
+    padding-left: 1.2rem;
+    color: #a1a2ab;
+}

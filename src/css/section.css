@@ -1,0 +1,40 @@
+
+.section a {
+    text-decoration: none !important;
+}
+.widget {
+    transition: all 0.2s ease-in-out 0s;
+    display: inline-block;
+    width: 110px;
+    height: 80px;
+    vertical-align: top;
+    text-align: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+.widget:hover {
+
+    background-color: rgba(0,0,0,0.35);
+}
+.widget-link .widget-inner {
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(81,76,76,0.4);
+}
+
+.widget-link .widget-inner img, .widget-link .widget-inner svg {
+    width: 36px;
+    height: 36px;
+    margin-top: 8px;
+}
+
+.widget p {
+    color: white;
+}
+

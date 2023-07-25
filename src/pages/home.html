@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home Page</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta name="theme-color" content="#29293a" />
+
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/section.css" />
+        <link rel="stylesheet" href="../css/modal.css" />
+        <link rel="stylesheet" href="../css/dropdown.css" />
+    </head>
+    <body>
+        <header class="page-head">
+            <div class="page-nav">
+                <h3 style="color: white; margin-top: 6px">Home Page</h3>
+                <ul id="nav-bar" class="navbar">
+                    <li id="nav-page-home" onclick="Page_Load('page-home')">
+                        <a>Home</a>
+                    </li>
+                </ul>
+                <div
+                    class="settings-dropdown"
+                    style="margin-left: auto; margin-top: 6px"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#479cd0"
+                            d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97c0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1c0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"
+                        />
+                    </svg>
+                    <div class="dropdown-content">
+                        <a
+                            rel="noopener"
+                            target="_blank"
+                            href="https://blog.hubspot.com/"
+                            >Blog</a
+                        >
+                        <a
+                            rel="noopener"
+                            target="_blank"
+                            href="https://academy.hubspot.com/"
+                            >Academy</a
+                        >
+                        <a
+                            rel="noopener"
+                            target="_blank"
+                            href="https://www.youtube.com/user/hubspot"
+                            >YouTube</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="body" class="page-body">
+            <div class="section sortable-list"></div>
+
+            <div class="widget widget-clock">
+                <div
+                    class="widget-inner"
+                    ondragstart="event.preventDefault();"
+                    draggable="false"
+                >
+                    <h3 id="clock" style="color: white">00:00</h3>
+                </div>
+            </div>
+
+            <div id="btn-add" class="widget">
+                <div class="widget-inner">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#7ec884"
+                            d="M20 14h-6v6h-4v-6H4v-4h6V4h4v6h6v4Z"
+                        />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div data-src="../parts/modals.html"></div>
+        <script src="../js/a_main.js" type="module"></script>
+    </body>
+</html>
