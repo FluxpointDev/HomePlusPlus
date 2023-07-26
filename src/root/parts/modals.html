@@ -87,10 +87,10 @@
 </div>
 
 <!-- 
-    Page limit modal
+    Add menu
  -->
 
-<div class="modal micromodal-slide" id="modal-page-limit" aria-hidden="true">
+<div class="modal micromodal-slide" id="modal-create" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div
             class="modal__container"
@@ -99,7 +99,7 @@
             aria-labelledby="modal-1-title"
         >
             <header class="modal__header">
-                <h2 class="modal__title">Page Limit</h2>
+                <h2 class="modal__title">Add</h2>
                 <button
                     class="modal__close"
                     aria-label="Close modal"
@@ -107,7 +107,16 @@
                 ></button>
             </header>
             <main class="modal__content">
-                <p>You can only have up to 5 pages!</p>
+                <button
+                    style="display: none"
+                    id="btn-modal-addpage"
+                    data-micromodal-ok
+                >
+                    Add Page
+                </button>
+                <button id="btn-modal-addlink" data-micromodal-ok>
+                    Add Link
+                </button>
             </main>
             <footer class="modal__footer">
                 <button
@@ -146,6 +155,53 @@
                 <p>Error here</p>
             </main>
             <footer class="modal__footer">
+                <button
+                    class="modal__btn modal__btn-close"
+                    data-micromodal-close
+                    aria-label="Close this dialog window"
+                >
+                    Close
+                </button>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    Create link modal
+ -->
+
+<div class="modal micromodal-slide" id="modal-link-create" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div
+            class="modal__container"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-1-title"
+        >
+            <header class="modal__header">
+                <h2 class="modal__title">Add Link</h2>
+                <button
+                    class="modal__close"
+                    aria-label="Close modal"
+                    data-micromodal-close
+                ></button>
+            </header>
+            <main class="modal__content">
+                <p>Create a new link widget.</p>
+                <label class="modal__label">Name</label>
+                <input class="modal__input" />
+
+                <label class="modal__label">Link</label>
+                <input class="modal__input" />
+            </main>
+            <footer class="modal__footer">
+                <button
+                    data-micromodal-ok
+                    class="modal__btn modal__btn-success"
+                >
+                    Continue
+                </button>
                 <button
                     class="modal__btn modal__btn-close"
                     data-micromodal-close

@@ -22,6 +22,18 @@ function Load_Data() {
             $("#nav-bar").append(node);
         }
     }
+
+    LoadItems();
+}
+
+function LoadItems() {
+    var sortableList = document.querySelector(".sortable-list");
+
+    CurrentPage.PageData.sections[0].widgets.forEach((element) => {
+        sortableList.append(DOM_CreateWidget(element));
+    });
+
+    window.GlobalSort.sort(function (item) {});
 }
 
 function Page_Load(page_key) {
@@ -39,12 +51,20 @@ function Page_Load(page_key) {
         CurrentPage.PageData.name = "Home";
         CurrentPage.PageData.sections = Array({
             id: randomString(),
+            widgets: Array(),
         });
         window.localStorage.setItem(
             CurrentPage.PageKey,
             JSON.stringify(CurrentPage.PageData)
         );
     }
+}
+
+function PageData_Save() {
+    window.localStorage.setItem(
+        CurrentPage.PageKey,
+        JSON.stringify(CurrentPage.PageData)
+    );
 }
 
 // document

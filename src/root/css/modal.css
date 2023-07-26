@@ -236,3 +236,15 @@
 .modal__close {
     outline: none !important;
 }
+
+.modal__content button {
+    color: white;
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 4px;
+    padding: 8px;
+    background: #333346;
+    border: none;
+    cursor: pointer;
+}

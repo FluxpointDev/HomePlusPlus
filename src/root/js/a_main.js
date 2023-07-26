@@ -1,12 +1,12 @@
 import "./jquery-min.js";
+import "./order2.js";
+import "./data.js";
 
+import "./dom.js";
 import("./test.js");
-import("./order2.js");
-import("./data.js");
+
 import("./context.js");
 import("./micromodal.js");
-
-// Initial config for setting up modals
 
 async function getFileContentAsText(file) {
     const response = await fetch(file);
@@ -17,21 +17,100 @@ async function getFileContentAsText(file) {
 insertContentsFromFiles();
 async function insertContentsFromFiles() {
     console.log("Load files");
-    const tbl = document.querySelectorAll("[data-src]"); // get elements with the data attribute "data-src"
-    for (
-        var i = 0;
-        i < tbl.length;
-        i++ // loop over the elements contained in tbl
-    ) {
+    const tbl = document.querySelectorAll("[data-src]");
+    for (var i = 0; i < tbl.length; i++) {
         try {
             tbl[i].outerHTML = await getFileContentAsText(tbl[i].dataset.src);
         } catch {}
     }
 
+    document
+        .getElementById("btn-add")
+        .addEventListener("click", OpenCreateModal);
+
+    document
+        .getElementById("btn-modal-addpage")
+        .addEventListener("click", OpenPageModal);
+
     MicroModal.init({
         disableScroll: false,
         awaitCloseAnimation: true,
     });
+}
+
+function ToastService() {
+    return new Toasts({
+        width: 300,
+        timing: "ease",
+        duration: ".5s",
+        dimOld: false,
+        position: "top-left",
+    });
+}
+
+function OpenModals() {
+    var Toasts = ToastService();
+    Toasts.push({
+        title: "My Toast Notification Title",
+        content: "My toast notification description.",
+        style: "success",
+        dismissAfter: "5s",
+    });
+    Toasts.push({
+        title: "My Toast Notification Title",
+        content: "My toast notification description.",
+        style: "error",
+        dismissAfter: "5s",
+    });
+}
+
+function OpenCreateModal() {
+    MicroModal.show("modal-create", {
+        okTrigger: (data) => ModalSuccess(data),
+    });
+}
+
+function OpenPageModal() {
+    var pageCount = 0;
+    for (let [key, value] of Object.entries(localStorage)) {
+        if (key.startsWith("page-")) {
+            pageCount += 1;
+        }
+    }
+
+    // MicroModal.close("modal-create");
+
+    if (pageCount >= 5) {
+        MicroModal.showError("Page Limit", "You can only add up to 5 pages!");
+    } else {
+        MicroModal.show("modal-page-create", {
+            okTrigger: (data) => ModalSuccess(data),
+        });
+    }
+}
+
+function ModalSuccess(data) {
+    console.log("Modal success page");
+    console.log(data);
+
+    MicroModal.show("modal-link-create", {
+        okTrigger: (data) => ModalSuccesLinkCreate(data),
+    });
+}
+
+function ModalSuccesLinkCreate(data) {
+    var Name = data.children[2].value;
+    var Link = data.children[4].value;
+
+    if (Name == "undefined" || Link === "undefined") {
+        return;
+    }
+
+    CurrentPage.PageData.sections[0].widgets.append({
+        name: Name,
+        link: Link,
+    });
+    PageData_Save();
 }
 
 window.onload = function () {
@@ -42,48 +121,12 @@ window.onload = function () {
             "v" + browser.runtime.getManifest().version;
     }
 
-    LoadItems();
     getClockTime();
-    setInterval(getClockTime, 3000 * 15);
+    setInterval(getClockTime, 15000);
 };
 
-function LoadItems() {
-    var sortableList = document.querySelector(".sortable-list");
-
-    var item = CreateItem();
-    sortableList.append(item);
-    LoadDragItems();
-    SetDragEvents(item);
-}
-function CreateItem() {
-    var node = document.createElement("div");
-    node.setAttribute("draggable", true);
-    node.className = "widget widget-link";
-
-    var item_inner = document.createElement("div");
-    item_inner.className = "widget-inner";
-    item_inner.setAttribute("ondragstart", "event.preventDefault();");
-    item_inner.setAttribute("draggable", "false");
-
-    var item_a = document.createElement("a");
-
-    var item_image = document.createElement("img");
-    item_image.setAttribute(
-        "src",
-        "https://cdn.discordapp.com/avatars/1039854207559282729/c2a9cd24f464b310080a6a7d52a45f46.webp?size=256"
-    );
-
-    item_a.append(item_image);
-
-    var item_name = document.createElement("p");
-    item_name.textContent = "Test Name";
-
-    item_a.append(item_name);
-
-    item_inner.append(item_a);
-
-    node.append(item_inner);
-    return node;
+function CreateItem(name) {
+    "https://cdn.discordapp.com/avatars/1039854207559282729/c2a9cd24f464b310080a6a7d52a45f46.webp?size=256";
 }
 
 function getClockTime() {
@@ -95,7 +138,7 @@ function getClockTime() {
 
     if (hour > 12) {
         hour = hour - 12;
-        $meridiem = "PM";
+        meridiem = "PM";
     }
     if (hour == 0) {
         hour = 12;

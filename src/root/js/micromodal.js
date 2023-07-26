@@ -84,7 +84,6 @@
                     ModalObject.children[1].children[0].innerHTML =
                         this.config.message;
                 }
-                console.log(this);
 
                 this.modal.children[0].children[0].children[1].childNodes.forEach(
                     (element) => {
