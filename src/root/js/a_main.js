@@ -1,11 +1,11 @@
 import "./jquery-min.js";
+import "./dom.js";
 import "./order2.js";
 import "./data.js";
 
-import "./dom.js";
 import("./test.js");
 
-import("./context.js");
+// import("./context.js");
 import("./micromodal.js");
 
 async function getFileContentAsText(file) {
@@ -106,11 +106,13 @@ function ModalSuccesLinkCreate(data) {
         return;
     }
 
-    CurrentPage.PageData.sections[0].widgets.append({
+    window.CurrentPage.PageData.sections[0].widgets.push({
         name: Name,
         link: Link,
+        type: "link",
     });
-    PageData_Save();
+    window.GlobalSort.sort(function (item) {});
+    window.CurrentPage.Save();
 }
 
 window.onload = function () {

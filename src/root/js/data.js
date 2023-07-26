@@ -1,7 +1,12 @@
-class CurrentPage {
-    static PageKey = "page-home";
-    static PageData = null;
-}
+window.CurrentPage = {
+    PageKey: "page-home",
+    PageData: null,
+    Save: function PageData_Save() {
+        window.localStorage.setItem(PageKey, JSON.stringify(PageData));
+    },
+};
+
+var CurrentPage = window.CurrentPage;
 
 Load_Data();
 function Load_Data() {
@@ -29,8 +34,8 @@ function Load_Data() {
 function LoadItems() {
     var sortableList = document.querySelector(".sortable-list");
 
-    CurrentPage.PageData.sections[0].widgets.forEach((element) => {
-        sortableList.append(DOM_CreateWidget(element));
+    window.CurrentPage.PageData.sections[0].widgets.forEach((element) => {
+        sortableList.append(window.DOM.CreateWidget(element));
     });
 
     window.GlobalSort.sort(function (item) {});
@@ -43,28 +48,21 @@ function Page_Load(page_key) {
 
     var JsonContent = window.localStorage.getItem(page_key);
     if (JsonContent) {
-        CurrentPage.PageData = JSON.parse(JsonContent);
+        window.CurrentPage.PageData = JSON.parse(JsonContent);
         $("#nav-page-home")[0].children[0].innerHTML =
-            CurrentPage.PageData.name;
+            window.CurrentPage.PageData.name;
     } else {
-        CurrentPage.PageData = {};
-        CurrentPage.PageData.name = "Home";
-        CurrentPage.PageData.sections = Array({
+        window.CurrentPage.PageData = {};
+        window.CurrentPage.PageData.name = "Home";
+        window.CurrentPage.PageData.sections = Array({
             id: randomString(),
             widgets: Array(),
         });
         window.localStorage.setItem(
-            CurrentPage.PageKey,
-            JSON.stringify(CurrentPage.PageData)
+            window.CurrentPage.PageKey,
+            JSON.stringify(window.CurrentPage.PageData)
         );
     }
-}
-
-function PageData_Save() {
-    window.localStorage.setItem(
-        CurrentPage.PageKey,
-        JSON.stringify(CurrentPage.PageData)
-    );
 }
 
 // document

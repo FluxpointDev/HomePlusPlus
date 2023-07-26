@@ -1,5 +1,5 @@
 const list = document.querySelector(".sortable-list");
-const listItems = list.querySelectorAll(".widget");
+var listItems = null;
 
 // let dragIndex, dragSource
 
@@ -40,6 +40,8 @@ function sortAdd(item) {}
 
 function sortable(onUpdate) {
     var dragEl;
+
+    listItems = list.querySelectorAll(".widget");
 
     var rootEl = list;
 
