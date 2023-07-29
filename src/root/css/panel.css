@@ -1,0 +1,38 @@
+.panel h2 {
+    font-size: 14pt;
+    font-weight: 700 !important;
+    margin-bottom: 10px;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, Segoe UI,
+        Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    color: var(--theme-color);
+}
+.panel h3 {
+    font-size: 12pt;
+    margin-bottom: 6px;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, Segoe UI,
+        Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+.panel h5 {
+    font-size: 11pt;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    margin-left: 6px;
+    color: #cfcfcf;
+    line-height: 1.3;
+    word-wrap: break-word;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica,
+        Arial, sans-serif;
+}
+.panel * {
+    margin-left: 6px;
+}
+.panel h2,
+.panel h3 {
+    margin-left: 0px;
+}
+.panel hr {
+    color: var(--theme-color) !important;
+    opacity: 0.4;
+    margin-left: 0px;
+}

@@ -1,96 +1,123 @@
-window.CurrentPage = {
-    PageKey: "page-home",
-    PageData: null,
-    Save: function PageData_Save() {
-        window.localStorage.setItem(PageKey, JSON.stringify(PageData));
+window.Data = {
+    Settings: {
+        Theme: {
+            Mode: "dark",
+            BackgroundColor: "#2b2b36",
+            BackgroundImage: "background.jpg",
+            BackgroundImagePrimaryColor: "",
+            NavbarUseBackgroundColor: false,
+            NavbarColor: "#666E99",
+            Color: "#479cd0",
+        },
+        MainClock: {
+            Show: true,
+            Color: "#ffffff",
+        },
     },
+    Save: function Data_Save() {
+        window.localStorage.setItem(
+            "settings",
+            JSON.stringify(window.Data.Settings)
+        );
+    },
+    LoadSettingsPanel: () => LoadSettingsPanel(),
 };
 
-var CurrentPage = window.CurrentPage;
-
-Load_Data();
-function Load_Data() {
-    Page_Load("page-home");
-
-    for (let [key, value] of Object.entries(localStorage)) {
-        if (key.startsWith("page-") && key !== "page-home") {
-            var node = document.createElement("li");
-            node.id = "nav-" + key;
-            node.setAttribute("onclick", "Page_Load(" + key + ")");
-
-            var pagelink = document.createElement("a");
-
-            var PageSettings = JSON.parse(value);
-
-            pagelink.innerHTML = PageSettings.name;
-            node.append(pagelink);
-            $("#nav-bar").append(node);
-        }
-    }
-
-    LoadItems();
-}
-
-function LoadItems() {
-    var sortableList = document.querySelector(".sortable-list");
-
-    window.CurrentPage.PageData.sections[0].widgets.forEach((element) => {
-        sortableList.append(window.DOM.CreateWidget(element));
-    });
-
-    window.GlobalSort.sort(function (item) {});
-}
-
-function Page_Load(page_key) {
-    $(".section").each(function () {
-        // $(this).remove();
-    });
-
-    var JsonContent = window.localStorage.getItem(page_key);
+LoadSettings();
+function LoadSettings() {
+    var JsonContent = window.localStorage.getItem("settings");
     if (JsonContent) {
-        window.CurrentPage.PageData = JSON.parse(JsonContent);
-        $("#nav-page-home")[0].children[0].innerHTML =
-            window.CurrentPage.PageData.name;
+        window.Data.Settings = JSON.parse(JsonContent);
+        if (window.Data.Settings.Theme.Color !== "#479cd0") {
+            SetDocumentStyle("--theme-color", window.Data.Settings.Theme.Color);
+        }
+        window.DOM.LoadBackground();
     } else {
-        window.CurrentPage.PageData = {};
-        window.CurrentPage.PageData.name = "Home";
-        window.CurrentPage.PageData.sections = Array({
-            id: randomString(),
-            widgets: Array(),
-        });
-        window.localStorage.setItem(
-            window.CurrentPage.PageKey,
-            JSON.stringify(window.CurrentPage.PageData)
-        );
+        window.Data.Save();
     }
 }
 
-// document
-//    .getElementById("btn-page-delete")
-//    .addEventListener("click", Page_Delete);
+function LoadSettingsPanel() {
+    /* var ThemeBackgroundPicker = new Alwan("#theme-color-picker", {
+        theme: "dark",
+        toggle: true,
+        color: window.Data.Settings.Theme.Color,
+        popover: false,
+        preset: true,
+        toggleSwatches: false,
+        preview: true,
+        opacity: false,
+        format: "hex",
+        target: "#theme-color-menu",
+        inputs: {
+            rgb: true,
+            hex: true,
+            hsl: false,
+        },
+    });
 
-function Page_Delete() {
-    if (CurrentPage.PageKey === "page-home") {
-        return;
-    }
+    ThemeBackgroundPicker.on("change", function (colorObject, source) {
+        console.log("color changed: ");
+        console.log(colorObject.hex);
 
-    $("#nav-" + CurrentPage.PageKey).remove();
+        SetDocumentStyle("--theme-color", colorObject.hex);
+        window.Data.Settings.Save();
+    }); */
+
+    var ThemeColorPicker = LoadThemePicker(
+        window.Data.Settings.Theme.Color,
+        "#theme-color-picker",
+        "#theme-color-menu"
+    );
+
+    ThemeColorPicker.on("change", function (colorObject, source) {
+        SetDocumentStyle("--theme-color", colorObject.hex);
+        window.Data.Settings.Theme.Color = colorObject.hex;
+        window.Data.Save();
+    });
+
+    var ThemeBackgroundColorPicker = LoadThemePicker(
+        window.Data.Settings.Theme.BackgroundColor,
+        "#theme-background-color-picker",
+        "#theme-background-color-menu"
+    );
+
+    ThemeBackgroundColorPicker.on("change", function (colorObject, source) {
+        SetDocumentStyle("--theme-background-color", colorObject.hex);
+        window.Data.Settings.Theme.BackgroundColor = colorObject.hex;
+        window.Data.Save();
+    });
 }
 
-function randomString() {
-    var length = 10;
-    var chars =
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz".split(
-            ""
-        );
+function hexToRgb(hex) {
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
 
-    if (!length) {
-        length = Math.floor(Math.random() * chars.length);
-    }
+    return r + "," + g + "," + b;
+}
 
-    var str = "";
-    for (var i = 0; i < length; i++) {
-        str += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return str;
+function LoadThemePicker(setting, button, menu) {
+    return new Alwan(button, {
+        theme: "dark",
+        toggle: true,
+        color: setting,
+        popover: false,
+        preset: true,
+        toggleSwatches: false,
+        preview: true,
+        opacity: false,
+        format: "hex",
+        target: menu,
+        inputs: {
+            rgb: true,
+            hex: true,
+            hsl: false,
+        },
+    });
+}
+
+function SetDocumentStyle(key, style) {
+    document.documentElement.style.setProperty(key, style);
 }

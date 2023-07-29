@@ -2,22 +2,28 @@
     margin: 0;
     padding: 0;
 }
-
+html {
+    --theme-color: #479cd0;
+    --theme-background-color: #161719;
+}
 
 #clock {
     font-family: "Digital";
 }
 
 html {
+    background-color: var(--theme-background-color);
     background-repeat: no-repeat;
-background-size: cover !important;
-background-attachment: fixed !important;
-background-image: url('https://cdn.discordapp.com/attachments/625788123418198070/922603313436983306/ezgif.com-gif-maker.jpg'), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) !important;
-background-blend-mode: overlay !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-blend-mode: overlay !important;
+}
+.html-background {
+    background-color: transparent !important;
 }
 
 header {
-    padding: 4px;;
+    padding: 4px;
 }
 .page-head {
     background-color: rgba(51, 53, 71, 0.7);
@@ -37,7 +43,6 @@ header {
     padding: 4px;
 }
 .navbar {
-    
     list-style: none;
     display: flex;
     flex-direction: row;

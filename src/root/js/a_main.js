@@ -1,12 +1,20 @@
 import "./jquery-min.js";
 import "./dom.js";
-import "./order2.js";
+
 import "./data.js";
+import "./http.js";
+import "./colorpicker-min.js";
+
+import "./order2.js";
+
+import "./page_data.js";
 
 import("./test.js");
 
 // import("./context.js");
 import("./micromodal.js");
+
+var OptionalModules = ["./settings.js"];
 
 async function getFileContentAsText(file) {
     const response = await fetch(file);
@@ -23,6 +31,12 @@ async function insertContentsFromFiles() {
             tbl[i].outerHTML = await getFileContentAsText(tbl[i].dataset.src);
         } catch {}
     }
+
+    window.Data.LoadSettingsPanel();
+
+    OptionalModules.forEach((element) => {
+        import(element);
+    });
 
     document
         .getElementById("btn-add")
@@ -98,18 +112,21 @@ function ModalSuccess(data) {
     });
 }
 
-function ModalSuccesLinkCreate(data) {
-    var Name = data.children[2].value;
-    var Link = data.children[4].value;
+async function ModalSuccesLinkCreate(data) {
+    var Link = data.children[2].value;
 
-    if (Name == "undefined" || Link === "undefined") {
+    if (Link === "undefined") {
         return;
     }
 
+    var Json = await window.Http.GetFaviconBase64(Link);
+
     window.CurrentPage.PageData.sections[0].widgets.push({
-        name: Name,
+        name: Json.Name,
         link: Link,
         type: "link",
+        image: Json.Image,
+        color: Json.Color,
     });
     window.GlobalSort.sort(function (item) {});
     window.CurrentPage.Save();
