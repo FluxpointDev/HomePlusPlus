@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+:root {
+    scroll-behavior: smooth;
+}
 html {
     --theme-color: #479cd0;
     --theme-background-color: #161719;
