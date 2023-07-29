@@ -43,6 +43,12 @@ function ClearBackgroundImage() {
     DOM.LoadBackground();
 }
 
+$("#btn-settings-close")[0].addEventListener("click", CloseSettingsPanel);
+
+function CloseSettingsPanel() {
+    $("#SettingsPanel")[0].classList.remove("panel-show");
+}
+
 function SetDocumentStyle(key, style) {
     document.documentElement.style.setProperty(key, style);
 }

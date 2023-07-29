@@ -8,6 +8,10 @@ async function Dropdown_OptionSettings(element) {
     switch (element.id) {
         case "dropdown-settings":
             {
+                $("#SettingsPanel")[0].classList.add("panel-show");
+
+                return;
+
                 if (typeof browser === "undefined") {
                     MicroModal.showError(
                         "Addon Error",

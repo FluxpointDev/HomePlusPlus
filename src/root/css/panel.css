@@ -27,6 +27,12 @@
 .panel * {
     margin-left: 6px;
 }
+.panel {
+    visibility: hidden;
+}
+.panel-show {
+    visibility: visible !important;
+}
 .panel h2,
 .panel h3 {
     margin-left: 0px;

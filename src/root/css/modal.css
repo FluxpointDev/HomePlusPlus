@@ -248,3 +248,14 @@
     border: none;
     cursor: pointer;
 }
+
+.panel .modal__header {
+    position: relative;
+}
+.panel .modal__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: -22px;
+    margin-right: 10px;
+}
