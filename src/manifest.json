@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "manifest_version": 3,
 
-    "permissions": ["storage"],
+    "permissions": ["storage", "theme"],
     "optional_permissions": ["notifications", "topSites"],
     "description": "Bring the comfort of your home to your computer, customizable home tab to suit your needs and daily life.",
 

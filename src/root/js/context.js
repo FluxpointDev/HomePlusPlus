@@ -21,8 +21,15 @@ document.addEventListener(
     "click",
     function (e) {
         if (i.opacity === "0") return;
-        console.log("Click");
-        console.log(LastElement);
+
+        i.opacity = "0";
+        setTimeout(function () {
+            i.visibility = "hidden";
+        }, 501);
+
+        console.log(e.target);
+
+        if (e.target.textContent !== "Delete") return;
 
         if (
             LastElement.tagName === "DIV" &&
@@ -34,11 +41,6 @@ document.addEventListener(
             ].widgets[LastElement.id.split("-")[1]];
             window.CurrentPage.Save();
         }
-
-        i.opacity = "0";
-        setTimeout(function () {
-            i.visibility = "hidden";
-        }, 501);
     },
     false
 );
