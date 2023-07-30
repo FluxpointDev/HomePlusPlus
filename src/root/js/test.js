@@ -32,14 +32,23 @@ async function Dropdown_OptionSettings(element) {
                     return;
                 }
 
-                var Browser = await chrome.runtime.getBrowserInfo();
+                var BrowserName = "Unknown";
+                var BrowserBuild = "Unknown";
+                if (window.IsFirefox) {
+                    var Browser = await browser.runtime.getBrowserInfo();
+                    BrowserName = Browser.name + ` (v${Browser.version})`;
+                    BrowserBuild = Browser.buildID;
+                } else if (window.IsChrome) {
+                    BrowserName = "Chrome";
+                }
+
                 var Platform = await chrome.runtime.getPlatformInfo();
                 var AddonId = chrome.runtime.id;
                 MicroModal.showError(
                     "Debug Info",
                     `Extension ID: ${AddonId}<br /><br />
-                    Browser: ${Browser.name} (v${Browser.version})<br />
-                        Build: ${Browser.buildID}<br /><br />
+                    Browser: ${BrowserName}<br />
+                        Build: ${BrowserBuild}<br /><br />
                         OS: ${Platform.os} (${Platform.arch})`
                 );
                 return;
