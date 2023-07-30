@@ -121,13 +121,19 @@ async function ModalSuccesLinkCreate(data) {
 
     var Json = await window.Http.GetFaviconBase64(Link);
 
-    window.CurrentPage.PageData.sections[0].widgets.push({
+    var Data = {
         name: Json.Name,
         link: Link,
         type: "link",
         image: Json.Image,
         color: Json.Color,
-    });
+    };
+    window.CurrentPage.PageData.sections[0].widgets.push(Data);
+
+    var sortableList = document.querySelector(".sortable-list");
+
+    sortableList.append(window.DOM.CreateWidget(Data));
+
     window.GlobalSort.sort(function (item) {});
     window.CurrentPage.Save();
 }
