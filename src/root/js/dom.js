@@ -16,37 +16,48 @@ window.DOM = {
         switch (data.type) {
             case "link":
                 {
+                    var LinkObj = document.createElement("a");
+                    LinkObj.href = data.link;
+
+                    LinkObj.setAttribute(
+                        "ondragstart",
+                        "event.preventDefault();"
+                    );
+                    LinkObj.setAttribute("draggable", "false");
+
                     Object.classList.add("widget-link");
-                    Inner.append(Object_CreateWidgetLink(data, Object));
+                    Object_CreateWidgetLink(data, Inner);
+
+                    LinkObj.append(Inner);
+
+                    var Name = document.createElement("p");
+                    Name.innerHTML = data.name;
+
+                    LinkObj.append(Name);
+
+                    Object.append(LinkObj);
                 }
                 break;
             case "clock":
                 {
                     Object.classList.add("widget-clock");
+                    Object.prepend(Inner);
                 }
                 break;
         }
-        Object.prepend(Inner);
+
         return Object;
     },
     LoadBackground: () => LoadBackground(),
 };
 
 function Object_CreateWidgetLink(data, main) {
-    var Object = document.createElement("a");
-    Object.href = data.link;
-    Object.setAttribute("target", "_blank");
-
     var Image = document.createElement("img");
     Image.src = data.image;
 
-    Object.append(Image);
+    main.append(Image);
 
-    var Name = document.createElement("p");
-    Name.innerHTML = data.name;
-
-    main.append(Name);
-    return Object;
+    return main;
 }
 
 function hexToRgb(hex) {
