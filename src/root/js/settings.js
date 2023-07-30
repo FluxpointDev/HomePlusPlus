@@ -49,6 +49,18 @@ function CloseSettingsPanel() {
     $("#SettingsPanel")[0].classList.remove("panel-show");
 }
 
+$("#theme-mode")[0].addEventListener("input", ThemeModeChange);
+
+function ThemeModeChange(event) {
+    if (window.Data.Settings.Theme.Mode === "dark") {
+        window.Data.Settings.Theme.Mode = "light";
+    } else {
+        window.Data.Settings.Theme.Mode = "dark";
+    }
+    window.Data.Save();
+    window.Data.ThemeModeChanged();
+}
+
 function SetDocumentStyle(key, style) {
     document.documentElement.style.setProperty(key, style);
 }

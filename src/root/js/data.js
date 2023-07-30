@@ -21,6 +21,7 @@ window.Data = {
         );
     },
     LoadSettingsPanel: () => LoadSettingsPanel(),
+    ThemeModeChanged: () => ThemeModeChanged(),
 };
 
 LoadSettings();
@@ -37,54 +38,40 @@ function LoadSettings() {
     }
 }
 
-function LoadSettingsPanel() {
-    /* var ThemeBackgroundPicker = new Alwan("#theme-color-picker", {
-        theme: "dark",
-        toggle: true,
-        color: window.Data.Settings.Theme.Color,
-        popover: false,
-        preset: true,
-        toggleSwatches: false,
-        preview: true,
-        opacity: false,
-        format: "hex",
-        target: "#theme-color-menu",
-        inputs: {
-            rgb: true,
-            hex: true,
-            hsl: false,
-        },
+function ThemeModeChanged() {
+    console.log("TRIGGER MODE");
+    console.log(PickerThemeColor);
+    PickerThemeColor.setOptions({ theme: window.Data.Settings.Theme.Mode });
+    PickerBackgroundColor.setOptions({
+        theme: window.Data.Settings.Theme.Mode,
     });
+}
 
-    ThemeBackgroundPicker.on("change", function (colorObject, source) {
-        console.log("color changed: ");
-        console.log(colorObject.hex);
+var PickerThemeColor;
+var PickerBackgroundColor;
 
-        SetDocumentStyle("--theme-color", colorObject.hex);
-        window.Data.Settings.Save();
-    }); */
-
-    var ThemeColorPicker = LoadThemePicker(
+function LoadSettingsPanel() {
+    PickerThemeColor = LoadThemePicker(
         window.Data.Settings.Theme.Color,
         "#theme-color-picker",
         "#theme-color-menu",
         ["#479cd0", "#fd3585", "#be5b31", "#1aa056"]
     );
 
-    ThemeColorPicker.on("change", function (colorObject, source) {
+    PickerThemeColor.on("change", function (colorObject, source) {
         SetDocumentStyle("--theme-color", colorObject.hex);
         window.Data.Settings.Theme.Color = colorObject.hex;
         window.Data.Save();
     });
 
-    var ThemeBackgroundColorPicker = LoadThemePicker(
+    PickerBackgroundColor = LoadThemePicker(
         window.Data.Settings.Theme.BackgroundColor,
         "#theme-background-color-picker",
         "#theme-background-color-menu",
         ["#161719"]
     );
 
-    ThemeBackgroundColorPicker.on("change", function (colorObject, source) {
+    PickerBackgroundColor.on("change", function (colorObject, source) {
         SetDocumentStyle("--theme-background-color", colorObject.hex);
         window.Data.Settings.Theme.BackgroundColor = colorObject.hex;
         window.Data.Save();
