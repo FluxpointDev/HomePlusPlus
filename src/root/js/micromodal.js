@@ -85,10 +85,17 @@
                         this.config.message;
                 }
 
+                var FirstFocusElement = null;
+
                 this.modal.children[0].children[0].children[1].childNodes.forEach(
                     (element) => {
-                        if (element.tagName === "INPUT" && element.value) {
-                            element.value = "";
+                        if (element.tagName === "INPUT") {
+                            if (element.value) {
+                                element.value = "";
+                            }
+                            if (FirstFocusElement === null) {
+                                FirstFocusElement = element;
+                            }
                         }
                     }
                 );
@@ -108,6 +115,9 @@
                     };
                     this.modal.addEventListener("animationend", e, !1);
                 } else this.setFocusToFirstNode();
+                if (FirstFocusElement) {
+                    FirstFocusElement.focus();
+                }
                 this.config.onShow(this.modal, this.activeElement);
             }
             closeModal() {

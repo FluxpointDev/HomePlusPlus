@@ -109,6 +109,19 @@ function ModalSuccess(data) {
     MicroModal.show("modal-link-create", {
         okTrigger: (data) => ModalSuccesLinkCreate(data),
     });
+    $("#input-modal-create-link")[0].value = "https://";
+    $("#input-modal-create-link")[0].addEventListener("paste", OnPasteLink);
+}
+
+function OnPasteLink(event) {
+    var PasteData = event.clipboardData.getData("Text");
+    if (
+        this.value &&
+        this.value.startsWith("https://") &&
+        PasteData.startsWith("https://")
+    ) {
+        this.value = PasteData;
+    }
 }
 
 async function ModalSuccesLinkCreate(data) {
@@ -116,6 +129,10 @@ async function ModalSuccesLinkCreate(data) {
 
     if (Link === "undefined") {
         return;
+    }
+
+    if (Link.startsWith("https://") === false) {
+        Link = "https://" + Link;
     }
 
     var Json = await window.Http.GetFaviconBase64(Link);
@@ -134,9 +151,9 @@ async function ModalSuccesLinkCreate(data) {
     var sortableList = document.querySelector(".sortable-list");
 
     sortableList.append(window.DOM.CreateWidget(Data));
+    window.CurrentPage.Save();
 
     window.GlobalSort.sort(function (item) {});
-    window.CurrentPage.Save();
 }
 
 window.onload = function () {
