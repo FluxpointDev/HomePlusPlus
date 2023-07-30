@@ -12,19 +12,19 @@ async function Dropdown_OptionSettings(element) {
 
                 return;
 
-                if (typeof browser === "undefined") {
+                if (!window.IsExtension) {
                     MicroModal.showError(
                         "Addon Error",
                         "Addon has not been installed."
                     );
                     return;
                 }
-                browser.runtime.openOptionsPage();
+                chrome.runtime.openOptionsPage();
             }
             break;
         case "dropdown-debug":
             {
-                if (typeof browser === "undefined") {
+                if (!window.IsExtension) {
                     MicroModal.showError(
                         "Addon Error",
                         "Addon has not been installed."
@@ -32,9 +32,9 @@ async function Dropdown_OptionSettings(element) {
                     return;
                 }
 
-                var Browser = await browser.runtime.getBrowserInfo();
-                var Platform = await browser.runtime.getPlatformInfo();
-                var AddonId = browser.runtime.id;
+                var Browser = await chrome.runtime.getBrowserInfo();
+                var Platform = await chrome.runtime.getPlatformInfo();
+                var AddonId = chrome.runtime.id;
                 MicroModal.showError(
                     "Debug Info",
                     `Extension ID: ${AddonId}<br /><br />

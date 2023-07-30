@@ -6,7 +6,7 @@ $("#btn-settings-theme-background-image-save")[0].addEventListener(
 async function UpdateBackgroundImage() {
     var WebURL = $("#input-settings-theme-background-image")[0].value;
 
-    if (WebURL === "undefined") return;
+    if (typeof WebURL === "undefined") return;
 
     var b64 = await window.Http.GetImageBase64(WebURL);
 

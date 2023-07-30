@@ -1,4 +1,4 @@
-window.IsExtension = typeof browser !== "undefined";
+window.IsExtension = typeof chrome !== "undefined";
 
 import "./jquery-min.js";
 import "./dom.js";
@@ -143,7 +143,7 @@ function OnPasteLink(event) {
 async function ModalSuccesLinkCreate(data) {
     var Link = data.children[2].value;
 
-    if (Link === "undefined") {
+    if (typeof Link === "undefined") {
         return;
     }
 
@@ -194,9 +194,9 @@ async function ModalSuccesLinkCreate(data) {
 window.onload = function () {
     console.log("Initialize home");
 
-    if (typeof browser !== "undefined") {
+    if (window.IsExtension) {
         $("#dropdown-version")[0].innerHTML =
-            "v" + browser.runtime.getManifest().version;
+            "v" + chrome.runtime.getManifest().version;
     }
 
     getClockTime();
