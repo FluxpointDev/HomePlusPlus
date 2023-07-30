@@ -1,4 +1,10 @@
 window.IsExtension = typeof chrome !== "undefined";
+window.IsFirefox = navigator.userAgent.indexOf("Firefox") > 0;
+window.IsChrome = navigator.userAgent.indexOf("Chrome") > 0;
+
+const global = {
+    IsExtension: window.IsExtension,
+};
 
 import "./jquery-min.js";
 import "./dom.js";
