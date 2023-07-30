@@ -23,7 +23,7 @@ function Load_Data() {
 
             var PageSettings = JSON.parse(value);
 
-            pagelink.innerHTML = PageSettings.name;
+            pagelink.textContent = PageSettings.name;
             node.append(pagelink);
             $("#nav-bar").append(node);
         }
@@ -57,7 +57,7 @@ function Page_Load(page_key) {
     var JsonContent = window.localStorage.getItem(page_key);
     if (JsonContent) {
         window.CurrentPage.PageData = JSON.parse(JsonContent);
-        $("#nav-page-home")[0].children[0].innerHTML =
+        $("#nav-page-home")[0].children[0].textContent =
             window.CurrentPage.PageData.name;
     } else {
         window.CurrentPage.PageData = {};

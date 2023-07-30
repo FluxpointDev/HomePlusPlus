@@ -32,7 +32,7 @@ window.DOM = {
                     LinkObj.append(Inner);
 
                     var Name = document.createElement("p");
-                    Name.innerHTML = data.name;
+                    Name.textContent = data.name;
 
                     LinkObj.append(Name);
 
