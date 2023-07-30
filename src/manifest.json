@@ -8,9 +8,6 @@
     "description": "Bring the comfort of your home to your computer, customizable home tab to suit your needs and daily life.",
 
     "author": "builderb@fluxpoint.dev",
-    "chrome_settings_overrides": {
-        "homepage": "root/home.html"
-    },
     "chrome_url_overrides": {
         "newtab": "root/home.html"
     },
