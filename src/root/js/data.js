@@ -67,7 +67,8 @@ function LoadSettingsPanel() {
     var ThemeColorPicker = LoadThemePicker(
         window.Data.Settings.Theme.Color,
         "#theme-color-picker",
-        "#theme-color-menu"
+        "#theme-color-menu",
+        ["#479cd0", "#fd3585", "#be5b31", "#1aa056"]
     );
 
     ThemeColorPicker.on("change", function (colorObject, source) {
@@ -79,7 +80,8 @@ function LoadSettingsPanel() {
     var ThemeBackgroundColorPicker = LoadThemePicker(
         window.Data.Settings.Theme.BackgroundColor,
         "#theme-background-color-picker",
-        "#theme-background-color-menu"
+        "#theme-background-color-menu",
+        ["#161719"]
     );
 
     ThemeBackgroundColorPicker.on("change", function (colorObject, source) {
@@ -98,14 +100,14 @@ function hexToRgb(hex) {
     return r + "," + g + "," + b;
 }
 
-function LoadThemePicker(setting, button, menu) {
+function LoadThemePicker(setting, button, menu, defaults) {
     return new Alwan(button, {
         theme: "dark",
         toggle: true,
         color: setting,
         popover: false,
         preset: true,
-        toggleSwatches: false,
+        toggleSwatches: true,
         preview: true,
         opacity: false,
         format: "hex",
@@ -115,6 +117,7 @@ function LoadThemePicker(setting, button, menu) {
             hex: true,
             hsl: false,
         },
+        swatches: defaults,
     });
 }
 
