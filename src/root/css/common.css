@@ -77,3 +77,38 @@ header {
     font-size: 12pt;
     color: rgb(237, 236, 236) !important;
 }
+
+#menu {
+    position: fixed;
+    z-index: 9999; /* Most times is 2000 used as middle */
+    visibility: hidden;
+    opacity: 0;
+
+    padding: 0px;
+    font-family: sans-serif;
+    font-size: 11px;
+    background: #fff;
+    color: #555;
+    border: 1px solid #c6c6c6;
+
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+
+    width: 130px;
+}
+#menu div {
+    display: block;
+    color: #555;
+    text-decoration: none;
+    padding: 6px 8px 6px 30px;
+    position: relative;
+}
+#menu div:hover {
+    color: #fff;
+    background: #3879d9;
+}
+#menu hr {
+    border: 1px solid #ebebeb;
+    border-bottom: 0;
+}

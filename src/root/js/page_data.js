@@ -39,6 +39,8 @@ function LoadItems() {
         sortableList.append(window.DOM.CreateWidget(element));
     });
 
+    import("./context.js");
+
     window.GlobalSort.sort(function (item) {});
 }
 

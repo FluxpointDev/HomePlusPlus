@@ -1,6 +1,7 @@
 window.DOM = {
     CreateWidget: function DOM_CreateWidget(data) {
         var Object = document.createElement("div");
+        Object.id = "widget-" + data.id;
         Object.classList.add("widget");
 
         var Inner = document.createElement("div");

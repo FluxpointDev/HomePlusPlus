@@ -11,7 +11,6 @@ import "./page_data.js";
 
 import("./test.js");
 
-// import("./context.js");
 import("./micromodal.js");
 
 var OptionalModules = ["./settings.js"];
