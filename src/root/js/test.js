@@ -22,6 +22,22 @@ async function Dropdown_OptionSettings(element) {
                 chrome.runtime.openOptionsPage();
             }
             break;
+        case "dropdown-about":
+            {
+                MicroModal.showError(
+                    "About Home++",
+                    `This extension was made by Builderb (Fluxpoint Development)<br />
+                    Check out the source code on our <a target="_blank" href="https://github.com/FluxpointDev/HomePlusPlus">GitHub</a><br />
+                    Join our Discord server: <a target="_blank" href="https://discord.gg/fluxpoint">https://discord.gg/fluxpoint</a><br /><br />
+                    3rd party modules used<br />
+                    JQuery by John Resig <a target="_blank" href="https://github.com/jquery/jquery">Link</a><br />
+                    Alwan color picker by Sofian - <a target="_blank" href="https://github.com/SofianChouaib/alwan">Link</a><br />
+                    MicroModal by Indrashish - <a target="_blank" href="https://github.com/ghosh/Micromodal">Link</a><br />
+                    Toasts by Varun - <a target="_blank" href="https://github.com/apvarun/toastify-js">Link</a><br />
+                    `
+                );
+            }
+            break;
         case "dropdown-debug":
             {
                 if (!window.IsExtension) {
