@@ -121,13 +121,15 @@ async function ModalSuccesLinkCreate(data) {
     var Json = await window.Http.GetFaviconBase64(Link);
 
     var Data = {
+        id: randomString(),
         name: Json.Name,
         link: Link,
         type: "link",
         image: Json.Image,
         color: Json.Color,
     };
-    window.CurrentPage.PageData.sections[0].widgets.push(Data);
+    Object.values(window.CurrentPage.PageData.sections)[0].widgets[Data.id] =
+        Data;
 
     var sortableList = document.querySelector(".sortable-list");
 
@@ -175,4 +177,22 @@ function getClockTime() {
     }
     var timeString = hour + ":" + minute + " " + meridiem;
     document.getElementById("clock").innerHTML = timeString;
+}
+
+function randomString() {
+    var length = 10;
+    var chars =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz".split(
+            ""
+        );
+
+    if (!length) {
+        length = Math.floor(Math.random() * chars.length);
+    }
+
+    var str = "";
+    for (var i = 0; i < length; i++) {
+        str += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return str;
 }

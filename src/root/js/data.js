@@ -32,10 +32,10 @@ function LoadSettings() {
         if (window.Data.Settings.Theme.Color !== "#479cd0") {
             SetDocumentStyle("--theme-color", window.Data.Settings.Theme.Color);
         }
-        window.DOM.LoadBackground();
     } else {
         window.Data.Save();
     }
+    window.DOM.LoadBackground();
 }
 
 function ThemeModeChanged() {

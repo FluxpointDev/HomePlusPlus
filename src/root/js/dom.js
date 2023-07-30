@@ -46,6 +46,9 @@ window.DOM = {
                 }
                 break;
         }
+        if (window.Context) {
+            window.Context.AddContextMenu(Object);
+        }
 
         return Object;
     },

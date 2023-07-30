@@ -35,9 +35,11 @@ function Load_Data() {
 function LoadItems() {
     var sortableList = document.querySelector(".sortable-list");
 
-    window.CurrentPage.PageData.sections[0].widgets.forEach((element) => {
-        sortableList.append(window.DOM.CreateWidget(element));
-    });
+    for (let [key, value] of Object.entries(
+        Object.values(window.CurrentPage.PageData.sections)[0].widgets
+    )) {
+        sortableList.append(window.DOM.CreateWidget(value));
+    }
 
     import("./context.js");
 
@@ -57,10 +59,12 @@ function Page_Load(page_key) {
     } else {
         window.CurrentPage.PageData = {};
         window.CurrentPage.PageData.name = "Home";
-        window.CurrentPage.PageData.sections = Array({
-            id: randomString(),
-            widgets: Array(),
-        });
+        var SectionId = randomString();
+        window.CurrentPage.PageData.sections = {};
+        window.CurrentPage.PageData.sections[SectionId] = {
+            id: SectionId,
+            widgets: {},
+        };
         window.localStorage.setItem(
             window.CurrentPage.PageKey,
             JSON.stringify(window.CurrentPage.PageData)
