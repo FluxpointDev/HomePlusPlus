@@ -17,7 +17,7 @@ window.DOM = {
             case "link":
                 {
                     Object.classList.add("widget-link");
-                    Inner.append(Object_CreateWidgetLink(data));
+                    Inner.append(Object_CreateWidgetLink(data, Object));
                 }
                 break;
             case "clock":
@@ -26,13 +26,13 @@ window.DOM = {
                 }
                 break;
         }
-        Object.append(Inner);
+        Object.prepend(Inner);
         return Object;
     },
     LoadBackground: () => LoadBackground(),
 };
 
-function Object_CreateWidgetLink(data) {
+function Object_CreateWidgetLink(data, main) {
     var Object = document.createElement("a");
     Object.href = data.link;
     Object.setAttribute("target", "_blank");
@@ -45,7 +45,7 @@ function Object_CreateWidgetLink(data) {
     var Name = document.createElement("p");
     Name.innerHTML = data.name;
 
-    Object.append(Name);
+    main.append(Name);
     return Object;
 }
 
