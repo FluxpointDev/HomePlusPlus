@@ -5,7 +5,7 @@
 
     "permissions": ["storage"],
     "optional_permissions": ["notifications", "topSites", "theme"],
-    "description": "Bring the comfort of your home to your computer, customizable home tab to suit your needs and daily life.",
+    "description": "Lightweight and customizable home page to enhance your browsing experience and daily usage with your own links, background, theme and other settings.",
 
     "author": "builderb@fluxpoint.dev",
     "chrome_url_overrides": {
