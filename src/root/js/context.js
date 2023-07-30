@@ -29,9 +29,9 @@ document.addEventListener(
             LastElement.id.startsWith("widget-")
         ) {
             LastElement.remove();
-            delete window.CurrentPage.PageData.sections.EoicG2G8EC.widgets[
-                LastElement.id.split("-")[1]
-            ];
+            delete window.CurrentPage.PageData.sections[
+                $(".section")[0].id.split("-")[1]
+            ].widgets[LastElement.id.split("-")[1]];
             window.CurrentPage.Save();
         }
 

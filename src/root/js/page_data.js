@@ -35,6 +35,9 @@ function Load_Data() {
 function LoadItems() {
     var sortableList = document.querySelector(".sortable-list");
 
+    $(".section")[0].id =
+        "section-" + Object.values(window.CurrentPage.PageData.sections)[0].id;
+
     for (let [key, value] of Object.entries(
         Object.values(window.CurrentPage.PageData.sections)[0].widgets
     )) {
