@@ -151,10 +151,6 @@ window.onload = function () {
     setInterval(getClockTime, 15000);
 };
 
-function CreateItem(name) {
-    "https://cdn.discordapp.com/avatars/1039854207559282729/c2a9cd24f464b310080a6a7d52a45f46.webp?size=256";
-}
-
 function getClockTime() {
     var now = new Date();
     var hour = now.getHours();

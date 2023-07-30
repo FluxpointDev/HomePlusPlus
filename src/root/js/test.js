@@ -34,9 +34,11 @@ async function Dropdown_OptionSettings(element) {
 
                 var Browser = await browser.runtime.getBrowserInfo();
                 var Platform = await browser.runtime.getPlatformInfo();
+                var AddonId = browser.runtime.id;
                 MicroModal.showError(
                     "Debug Info",
-                    `Browser: ${Browser.name} (v${Browser.version})<br />
+                    `Extension ID: ${AddonId}<br /><br />
+                    Browser: ${Browser.name} (v${Browser.version})<br />
                         Build: ${Browser.buildID}<br /><br />
                         OS: ${Platform.os} (${Platform.arch})`
                 );
