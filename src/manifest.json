@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "manifest_version": 3,
 
-    "permissions": ["storage", "theme"],
-    "optional_permissions": ["notifications", "topSites"],
+    "permissions": ["storage"],
+    "optional_permissions": ["notifications", "topSites", "theme"],
     "description": "Bring the comfort of your home to your computer, customizable home tab to suit your needs and daily life.",
 
     "author": "builderb@fluxpoint.dev",
