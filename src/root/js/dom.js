@@ -9,7 +9,7 @@ window.DOM = {
         Inner.setAttribute("draggable", "false");
         if (data.color) {
             var RGB = hexToRgb(data.color);
-            RGB += ",0.4";
+            RGB += ",0.3";
             Inner.style.setProperty("background-color", "RGBA(" + RGB + ")");
         }
 
