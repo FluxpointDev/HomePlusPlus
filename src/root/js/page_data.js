@@ -2,18 +2,33 @@ window.CurrentPage = {
     PageKey: "page-home",
     PageData: null,
     Save: function PageData_Save() {
-        window.localStorage.setItem(
+        window.Data.setItem(
             window.CurrentPage.PageKey,
             JSON.stringify(window.CurrentPage.PageData)
         );
     },
 };
 
-Load_Data();
-function Load_Data() {
+await Load_Data();
+async function Load_Data() {
+    var JsonContent = window.Data.getItem(window.CurrentPage.PageKey);
+    if (JsonContent) {
+    } else {
+        if (window.CurrentPage.PageKey === "page-home") {
+            console.log("Loading pages from extension data.");
+            var BackupPages = await chrome.storage.local.get(null);
+
+            for (let [key, value] of Object.entries(BackupPages)) {
+                if (key.startsWith("page-")) {
+                    window.Data.setItem(key, value);
+                }
+            }
+        }
+    }
+
     Page_Load("page-home");
 
-    for (let [key, value] of Object.entries(localStorage)) {
+    for (let [key, value] of Object.entries(window.localStorage)) {
         if (key.startsWith("page-") && key !== "page-home") {
             var node = document.createElement("li");
             node.id = "nav-" + key;
@@ -46,32 +61,44 @@ function LoadItems() {
 
     import("./context.js");
 
-    window.GlobalSort.sort(function (item) {});
+    //window.GlobalSort.sort(function (item) {});
 }
 
-function Page_Load(page_key) {
+async function Page_Load(page_key) {
     $(".section").each(function () {
         // $(this).remove();
     });
 
-    var JsonContent = window.localStorage.getItem(page_key);
+    var JsonContent = window.Data.getItem(page_key);
     if (JsonContent) {
         window.CurrentPage.PageData = JSON.parse(JsonContent);
-        $("#nav-page-home")[0].children[0].textContent =
-            window.CurrentPage.PageData.name;
+    }
+    if (JsonContent) {
+        if (page_key === "page-home") {
+            $("#nav-page-home")[0].children[0].textContent =
+                window.CurrentPage.PageData.name;
+        }
     } else {
         window.CurrentPage.PageData = {};
+        window.CurrentPage.PageData.id = "home";
         window.CurrentPage.PageData.name = "Home";
         var SectionId = randomString();
         window.CurrentPage.PageData.sections = {};
-        window.CurrentPage.PageData.sections[SectionId] = {
-            id: SectionId,
-            widgets: {},
-        };
-        window.localStorage.setItem(
-            window.CurrentPage.PageKey,
-            JSON.stringify(window.CurrentPage.PageData)
-        );
+
+        if (page_key === "page-home") {
+            window.CurrentPage.PageData.sections[SectionId] = {
+                id: SectionId,
+                widgets: {},
+            };
+            window.Data.setItem(
+                window.CurrentPage.PageKey,
+                JSON.stringify(window.CurrentPage.PageData)
+            );
+        }
+    }
+
+    if (JsonContent) {
+    } else {
     }
 }
 

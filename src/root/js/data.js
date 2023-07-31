@@ -15,32 +15,61 @@ window.Data = {
         },
     },
     Save: function Data_Save() {
-        window.localStorage.setItem(
-            "settings",
-            JSON.stringify(window.Data.Settings)
-        );
+        setItem("settings", JSON.stringify(window.Data.Settings));
     },
     LoadSettingsPanel: () => LoadSettingsPanel(),
     ThemeModeChanged: () => ThemeModeChanged(),
+    getAll: () => getAll(),
+    getItem: (key) => getItem(key),
+    setItem: (key, value) => setItem(key, value),
 };
 
-LoadSettings();
-function LoadSettings() {
-    var JsonContent = window.localStorage.getItem("settings");
+function getAll() {
+    return Object.entries(window.localStorage);
+}
+
+function getItem(key) {
+    return window.localStorage.getItem(key);
+}
+
+function setItem(key, value) {
+    if (window.IsExtension) {
+        chrome.storage.local.set({ [key]: value });
+    }
+    window.localStorage.setItem(key, value);
+}
+
+await LoadSettings();
+async function LoadSettings() {
+    var JsonContent = window.Data.getItem("settings");
+
     if (JsonContent) {
         window.Data.Settings = JSON.parse(JsonContent);
+    } else {
+        var HasContent = false;
+        if (window.IsExtension) {
+            JsonContent = await chrome.storage.local.get("settings");
+            if (JsonContent.settings) {
+                HasContent = true;
+                window.Data.Settings = JSON.parse(JsonContent.settings);
+                window.Data.Save();
+            }
+        }
+
+        if (!HasContent) {
+            window.Data.Save();
+        }
+    }
+
+    if (JsonContent) {
         if (window.Data.Settings.Theme.Color !== "#479cd0") {
             SetDocumentStyle("--theme-color", window.Data.Settings.Theme.Color);
         }
-    } else {
-        window.Data.Save();
     }
     window.DOM.LoadBackground();
 }
 
 function ThemeModeChanged() {
-    console.log("TRIGGER MODE");
-    console.log(PickerThemeColor);
     PickerThemeColor.setOptions({ theme: window.Data.Settings.Theme.Mode });
     PickerBackgroundColor.setOptions({
         theme: window.Data.Settings.Theme.Mode,
