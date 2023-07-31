@@ -22,7 +22,8 @@
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "hpp@fluxpoint.dev"
+            "id": "hpp@fluxpoint.dev",
+            "strict_min_version": "109.0"
         }
     }
 }
