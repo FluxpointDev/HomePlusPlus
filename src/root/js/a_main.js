@@ -1,5 +1,7 @@
 // Do not set window objects here
 
+import "./purify-min.js";
+import "./toast-min.js";
 import "./jquery-min.js";
 import "./dom.js";
 
@@ -7,7 +9,7 @@ import "./data.js";
 import "./http.js";
 import "./colorpicker-min.js";
 
-import "./order2.js";
+import "./order.js";
 
 import "./page_data.js";
 
@@ -194,7 +196,7 @@ window.onload = function () {
     console.log("Initialize home");
 
     if (window.IsExtension) {
-        $("#dropdown-version")[0].innerHTML =
+        $("#dropdown-version")[0].textContent =
             "v" + chrome.runtime.getManifest().version;
     }
 
@@ -223,7 +225,7 @@ function getClockTime() {
         second = "0" + second;
     }
     var timeString = hour + ":" + minute + " " + meridiem;
-    document.getElementById("clock").innerHTML = timeString;
+    document.getElementById("clock").textContent = timeString;
 }
 
 function randomString() {

@@ -79,10 +79,12 @@
             showModal() {
                 if (this.modal.id === "modal-error") {
                     var ModalObject = this.modal.children[0].children[0];
-                    ModalObject.children[0].children[0].innerHTML =
+                    ModalObject.children[0].children[0].textContent =
                         this.config.title;
-                    ModalObject.children[1].children[0].innerHTML =
-                        this.config.message;
+                    if (this.config.message) {
+                        ModalObject.children[1].children[0].innerHTML =
+                            DOMPurify.sanitize(this.config.message);
+                    }
                 }
 
                 var FirstFocusElement = null;
