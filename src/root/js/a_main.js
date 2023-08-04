@@ -16,6 +16,7 @@ import "./page_data.js";
 import("./test.js");
 
 import("./micromodal.js");
+import "./setup.js";
 
 var OptionalModules = ["./settings.js"];
 
@@ -26,6 +27,7 @@ async function getFileContentAsText(file) {
 }
 
 insertContentsFromFiles();
+window.Setup.LoadSetupWindow();
 async function insertContentsFromFiles() {
     console.log("Load files");
     const tbl = document.querySelectorAll("[data-src]");
@@ -53,6 +55,10 @@ async function insertContentsFromFiles() {
         disableScroll: false,
         awaitCloseAnimation: true,
     });
+
+    if (window.IsExtension && window.IsChrome) {
+        // Check for update here
+    }
 }
 
 function ToastService() {
