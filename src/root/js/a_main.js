@@ -144,6 +144,7 @@ function OnPasteLink(event) {
         PasteData.startsWith("https://")
     ) {
         this.value = PasteData;
+        event.preventDefault();
     }
 }
 
