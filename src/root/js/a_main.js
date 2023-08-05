@@ -17,7 +17,6 @@ import("./test.js");
 
 import("./micromodal.js");
 import "./setup.js";
-
 var OptionalModules = ["./settings.js"];
 
 async function getFileContentAsText(file) {

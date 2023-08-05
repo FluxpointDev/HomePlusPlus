@@ -37,6 +37,7 @@ function setItem(key, value) {
         chrome.storage.local.set({ [key]: value });
     }
     window.localStorage.setItem(key, value);
+    window.Settings.UpdateDataSize();
 }
 
 await LoadSettings();

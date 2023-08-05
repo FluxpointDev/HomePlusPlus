@@ -1,3 +1,23 @@
+window.Settings = {
+    UpdateDataSize: () => UpdateDataSize(),
+};
+
+function UpdateDataSize() {
+    var _lsTotal = 0,
+        _xLen,
+        _x;
+    for (_x in localStorage) {
+        if (!localStorage.hasOwnProperty(_x)) {
+            continue;
+        }
+        _xLen = (localStorage[_x].length + _x.length) * 2;
+        _lsTotal += _xLen;
+    }
+
+    $("#text-settings-data-size")[0].textContent =
+        (_lsTotal / 1024).toFixed(2) + " KB";
+}
+
 $("#btn-settings-theme-background-image-save")[0].addEventListener(
     "click",
     UpdateBackgroundImage

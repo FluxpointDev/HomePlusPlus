@@ -8,6 +8,7 @@ async function Dropdown_OptionSettings(element) {
     switch (element.id) {
         case "dropdown-settings":
             {
+                window.Settings.UpdateDataSize();
                 $("#SettingsPanel")[0].classList.add("panel-show");
 
                 return;
