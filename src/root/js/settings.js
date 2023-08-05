@@ -101,7 +101,7 @@ async function ResetDataConfirm(data) {
     if (window.IsExtension) {
         await chrome.storage.location.clear();
     }
-    localStorage.clear();
+    window.localStorage.clear();
 
     location.reload();
 }
