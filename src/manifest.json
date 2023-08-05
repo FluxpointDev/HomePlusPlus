@@ -5,7 +5,7 @@
 
     "permissions": ["storage"],
     "optional_permissions": ["notifications", "topSites"],
-    "description": "Lightweight and customizable home page to enhance your browsing experience and daily usage with your own links, background, theme and other settings.",
+    "description": "Lightweight and customizable home page to enhance your browsing experience with your own links, background, theme and settings.",
 
     "author": "builderb@fluxpoint.dev",
     "chrome_url_overrides": {
