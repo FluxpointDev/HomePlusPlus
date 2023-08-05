@@ -100,6 +100,7 @@ async function LoadSettings() {
 }
 
 function ThemeModeChanged() {
+    console.log("Theme change");
     PickerThemeColor.setOptions({ theme: window.Data.Settings.Theme.Mode });
     PickerBackgroundColor.setOptions({
         theme: window.Data.Settings.Theme.Mode,

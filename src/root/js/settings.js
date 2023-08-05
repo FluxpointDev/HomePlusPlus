@@ -69,14 +69,10 @@ function CloseSettingsPanel() {
     $("#SettingsPanel")[0].classList.remove("panel-show");
 }
 
-$("#theme-mode")[0].addEventListener("input", ThemeModeChange);
+$("#theme-mode")[0].addEventListener("change", ThemeModeChange);
 
-function ThemeModeChange(event) {
-    if (window.Data.Settings.Theme.Mode === "dark") {
-        window.Data.Settings.Theme.Mode = "light";
-    } else {
-        window.Data.Settings.Theme.Mode = "dark";
-    }
+function ThemeModeChange() {
+    window.Data.Settings.Theme.Mode = this.value;
     window.Data.Save();
     window.Data.ThemeModeChanged();
 }
