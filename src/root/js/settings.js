@@ -69,7 +69,7 @@ function CloseSettingsPanel() {
     $("#SettingsPanel")[0].classList.remove("panel-show");
 }
 
-$("#theme-mode")[0].addEventListener("change", ThemeModeChange);
+$("#select-theme-mode")[0].addEventListener("change", ThemeModeChange);
 
 function ThemeModeChange() {
     window.Data.Settings.Theme.Mode = this.value;
