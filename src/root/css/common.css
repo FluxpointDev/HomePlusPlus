@@ -137,10 +137,26 @@ header {
     vertical-align: middle;
     white-space: nowrap;
     background-color: #405cf5;
+    margin-bottom: 6px;
 }
 .btn-success {
     background-color: #2ea44f !important;
 }
 .btn-error {
     background-color: #ff4742 !important;
+}
+input,
+select,
+checkbox {
+    border-radius: 6px;
+    height: 30.4px;
+    margin-bottom: 6px;
+    width: calc(100% - 10px);
+    padding-left: 6px;
+    padding-right: 6px;
+    display: block;
+    background-color: #3a474d;
+    color: white !important;
+    border-color: #3a474d !important;
+    box-sizing: border-box;
 }

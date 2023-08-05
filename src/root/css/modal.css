@@ -259,3 +259,6 @@
     margin-top: -22px;
     margin-right: 10px;
 }
+.modal__overlay {
+    z-index: 1;
+}
