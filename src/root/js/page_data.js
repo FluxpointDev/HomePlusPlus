@@ -13,7 +13,7 @@ await Load_Data();
 async function Load_Data() {
     var JsonContent = window.Data.getItem(window.CurrentPage.PageKey);
     if (JsonContent) {
-    } else {
+    } else if (window.IsExtension) {
         if (window.CurrentPage.PageKey === "page-home") {
             console.log("Loading pages from extension data.");
             var BackupPages = await chrome.storage.local.get(null);

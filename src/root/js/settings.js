@@ -64,3 +64,24 @@ function ThemeModeChange(event) {
 function SetDocumentStyle(key, style) {
     document.documentElement.style.setProperty(key, style);
 }
+
+$("#btn-settings-data-delete")[0].addEventListener("click", OpenResetDataModal);
+
+function OpenResetDataModal() {
+    MicroModal.showOption(
+        "Reset Data",
+        "Are you sure you want to reset all data?",
+        {
+            okTrigger: (data) => ResetDataConfirm(data),
+        }
+    );
+}
+
+async function ResetDataConfirm(data) {
+    if (window.IsExtension) {
+        await chrome.storage.location.clear();
+    }
+    localStorage.clear();
+
+    location.reload();
+}

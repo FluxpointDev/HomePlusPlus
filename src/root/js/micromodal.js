@@ -77,7 +77,10 @@
                 });
             }
             showModal() {
-                if (this.modal.id === "modal-error") {
+                if (
+                    this.modal.id === "modal-error" ||
+                    this.modal.id === "modal-option"
+                ) {
                     var ModalObject = this.modal.children[0].children[0];
                     ModalObject.children[0].children[0].textContent =
                         this.config.title;
@@ -298,6 +301,16 @@
             },
             showError(title, message, n) {
                 var e = "modal-error";
+                var s = n || {};
+                s.title = title;
+                s.message = message;
+
+                (s.targetModal = e),
+                    (!0 === s.debugMode && !1 === i(e)) ||
+                        (o = new t(s)).showModal();
+            },
+            showOption(title, message, n) {
+                var e = "modal-option";
                 var s = n || {};
                 s.title = title;
                 s.message = message;
