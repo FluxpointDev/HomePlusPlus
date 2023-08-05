@@ -24,6 +24,24 @@ window.Data = {
     setItem: (key, value) => setItem(key, value),
 };
 
+if (window.IsExtension) {
+    chrome.storage.onChanged.addListener(async (changes, namespace) => {
+        for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+            if (key === "settings") {
+                window.Data.Settings = JSON.parse(newValue);
+            }
+            if (window.CurrentPage.PageKey === key) {
+                window.CurrentPage.PageData = JSON.parse(newValue);
+            }
+
+            //console.log(
+            //    `Storage key "${key}" in namespace "${namespace}" changed.`,
+            //    `Old value was "${oldValue}", new value is "${newValue}".`
+            //);
+        }
+    });
+}
+
 function getAll() {
     return Object.entries(window.localStorage);
 }
