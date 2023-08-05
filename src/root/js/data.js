@@ -111,7 +111,7 @@ var PickerThemeColor;
 var PickerBackgroundColor;
 
 function LoadSettingsPanel() {
-    if (window.Data.Settings.Theme.Mode === "light") {
+    if (window.Data.Settings.Theme.Mode !== $("#select-theme-mode")[0].value) {
         $("#select-theme-mode")[0].value = window.Data.Settings.Theme.Mode;
     }
 

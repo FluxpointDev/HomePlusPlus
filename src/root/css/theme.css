@@ -1,0 +1,6 @@
+.theme-light {
+    --panel-background-color: #f8f9fa;
+}
+.theme-dark {
+    --panel-background-color: linear-gradient(to top, #373737, #212121);
+}
