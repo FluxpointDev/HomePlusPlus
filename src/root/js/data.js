@@ -78,6 +78,11 @@ async function LoadSettings() {
         }
 
         if (!HasContent) {
+            window.Data.Settings.Theme.Mode = window?.matchMedia?.(
+                "(prefers-color-scheme:dark)"
+            )?.matches
+                ? "dark"
+                : "light";
             window.Data.Save();
         }
     }
@@ -85,6 +90,10 @@ async function LoadSettings() {
     if (JsonContent) {
         if (window.Data.Settings.Theme.Color !== "#479cd0") {
             SetDocumentStyle("--theme-color", window.Data.Settings.Theme.Color);
+        }
+        if (window.Data.Settings.Theme.Mode === "light") {
+            document.body.classList.add("theme-light");
+            document.body.classList.remove("theme-dark");
         }
     }
     window.DOM.LoadBackground();
