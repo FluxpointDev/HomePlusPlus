@@ -1,6 +1,83 @@
 window.Settings = {
+    OpenSettingsPanel: () => OpenSettingsPanel(),
     UpdateDataSize: () => UpdateDataSize(),
+    HasPanelHandle: false,
 };
+
+var PickerThemeColor;
+var PickerBackgroundColor;
+
+async function getFileContentAsText(file) {
+    const response = await fetch(file);
+    const fileContent = await response.text();
+    return fileContent;
+}
+
+async function OpenSettingsPanel() {
+    var SettingsPanel = $("#page-panel-right")[0];
+    SettingsPanel.innerHTML = await getFileContentAsText("parts/settings.html");
+    window.Settings.HasPanelHandle = true;
+    UpdateDataSize();
+
+    if (window.Data.Settings.Theme.Mode !== $("#select-theme-mode")[0].value) {
+        $("#select-theme-mode")[0].value = window.Data.Settings.Theme.Mode;
+    }
+
+    PickerThemeColor = LoadThemePicker(
+        window.Data.Settings.Theme.Color,
+        "#theme-color-picker",
+        "#theme-color-menu",
+        ["#479cd0", "#fd3585", "#be5b31", "#1aa056"]
+    );
+
+    PickerThemeColor.on("change", function (colorObject, source) {
+        SetDocumentStyle("--theme-color", colorObject.hex);
+        window.Data.Settings.Theme.Color = colorObject.hex;
+        window.Data.Save();
+    });
+
+    PickerBackgroundColor = LoadThemePicker(
+        window.Data.Settings.Theme.BackgroundColor,
+        "#theme-background-color-picker",
+        "#theme-background-color-menu",
+        ["#161719"]
+    );
+
+    PickerBackgroundColor.on("change", function (colorObject, source) {
+        SetDocumentStyle("--theme-background-color", colorObject.hex);
+        window.Data.Settings.Theme.BackgroundColor = colorObject.hex;
+        window.Data.Save();
+    });
+
+    $("#btn-settings-theme-background-image-save")[0].addEventListener(
+        "click",
+        UpdateBackgroundImage
+    );
+
+    $("#btn-settings-theme-background-image-default")[0].addEventListener(
+        "click",
+        DefaultBackgroundImage
+    );
+
+    $("#btn-settings-theme-background-image-clear")[0].addEventListener(
+        "click",
+        ClearBackgroundImage
+    );
+
+    $("#btn-settings-close")[0].addEventListener("click", CloseSettingsPanel);
+
+    $("#select-theme-mode")[0].addEventListener("change", ThemeModeChange);
+
+    $("#btn-settings-data-delete")[0].addEventListener(
+        "click",
+        OpenResetDataModal
+    );
+}
+
+function CloseSettingsPanel() {
+    $("#page-panel-right")[0].innerHTML = "";
+    window.Settings.HasPanelHandle = false;
+}
 
 function UpdateDataSize() {
     var _lsTotal = 0,
@@ -14,14 +91,11 @@ function UpdateDataSize() {
         _lsTotal += _xLen;
     }
 
-    $("#text-settings-data-size")[0].textContent =
-        (_lsTotal / 1024).toFixed(2) + " KB";
+    if (window.Settings.HasPanelHandle) {
+        $("#text-settings-data-size")[0].textContent =
+            (_lsTotal / 1024).toFixed(2) + " KB";
+    }
 }
-
-$("#btn-settings-theme-background-image-save")[0].addEventListener(
-    "click",
-    UpdateBackgroundImage
-);
 
 async function UpdateBackgroundImage() {
     var WebURL = $("#input-settings-theme-background-image")[0].value;
@@ -37,11 +111,6 @@ async function UpdateBackgroundImage() {
     DOM.LoadBackground();
 }
 
-$("#btn-settings-theme-background-image-default")[0].addEventListener(
-    "click",
-    DefaultBackgroundImage
-);
-
 function DefaultBackgroundImage() {
     window.Data.Settings.Theme.BackgroundImage = "background.jpg";
     window.Data.Settings.Theme.BackgroundImagePrimaryColor = null;
@@ -50,11 +119,6 @@ function DefaultBackgroundImage() {
     DOM.LoadBackground();
 }
 
-$("#btn-settings-theme-background-image-clear")[0].addEventListener(
-    "click",
-    ClearBackgroundImage
-);
-
 function ClearBackgroundImage() {
     window.Data.Settings.Theme.BackgroundImage = null;
     window.Data.Settings.Theme.BackgroundImagePrimaryColor = null;
@@ -62,14 +126,6 @@ function ClearBackgroundImage() {
 
     DOM.LoadBackground();
 }
-
-$("#btn-settings-close")[0].addEventListener("click", CloseSettingsPanel);
-
-function CloseSettingsPanel() {
-    $("#SettingsPanel")[0].classList.remove("panel-show");
-}
-
-$("#select-theme-mode")[0].addEventListener("change", ThemeModeChange);
 
 function ThemeModeChange() {
     window.Data.Settings.Theme.Mode = this.value;
@@ -81,14 +137,39 @@ function ThemeModeChange() {
         document.body.classList.remove("theme-dark");
     }
     window.Data.Save();
+
+    PickerThemeColor.setOptions({ theme: window.Data.Settings.Theme.Mode });
+    PickerBackgroundColor.setOptions({
+        theme: window.Data.Settings.Theme.Mode,
+    });
+
     window.Data.ThemeModeChanged();
+}
+
+function LoadThemePicker(setting, button, menu, defaults) {
+    return new Alwan(button, {
+        theme: window.Data.Settings.Theme.Mode === "dark" ? "dark" : "light",
+        toggle: true,
+        color: setting,
+        popover: false,
+        preset: true,
+        toggleSwatches: true,
+        preview: true,
+        opacity: false,
+        format: "hex",
+        target: menu,
+        inputs: {
+            rgb: true,
+            hex: true,
+            hsl: false,
+        },
+        swatches: defaults,
+    });
 }
 
 function SetDocumentStyle(key, style) {
     document.documentElement.style.setProperty(key, style);
 }
-
-$("#btn-settings-data-delete")[0].addEventListener("click", OpenResetDataModal);
 
 function OpenResetDataModal() {
     MicroModal.showOption(

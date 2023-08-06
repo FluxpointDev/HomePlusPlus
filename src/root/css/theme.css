@@ -1,6 +1,13 @@
 .theme-light {
     --panel-background-color: #f8f9fa;
+    --panel-text-main-color: black;
+    --panel-text-second-color: rgba(0, 0, 0, 0.6);
+    --panel-text-info-color: black;
+    --html-scrollbar-color: #c4c4c4 transparent;
 }
 .theme-dark {
     --panel-background-color: linear-gradient(to top, #373737, #212121);
+    --panel-text-main-color: white;
+    --panel-text-second-color: rgb(207, 207, 207);
+    --panel-text-info-color: rgb(170, 170, 170);
 }

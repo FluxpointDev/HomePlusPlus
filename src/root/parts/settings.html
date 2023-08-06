@@ -1,70 +1,64 @@
-<div id="SettingsPanel" class="panel panel-settings">
-    <div class="panel-inner">
-        <h2>
-            Settings
-            <div class="modal__header">
-                <button
-                    id="btn-settings-close"
-                    class="modal__close"
-                    aria-label="Close modal"
-                    data-micromodal-close=""
-                ></button>
-            </div>
-        </h2>
+<div id="SettingsPanel" class="panel">
+    <h2>
+        Settings
+        <div class="modal__header">
+            <button
+                id="btn-settings-close"
+                class="modal__close"
+                aria-label="Close modal"
+                data-micromodal-close=""
+            ></button>
+        </div>
+    </h2>
 
-        <h3>Theme</h3>
-        <hr />
-        <h5>Mode</h5>
-        <select id="select-theme-mode">
-            <option value="dark">Dark</option>
-            <option value="light">Light</option>
-        </select>
+    <h3>Theme</h3>
+    <hr />
+    <h5>Mode</h5>
+    <select id="select-theme-mode">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+    </select>
 
-        <h5>Theme Color</h5>
-        <button
-            id="theme-color-picker"
-            style="
-                background-color: var(--theme-color);
-                width: 50px;
-                height: 50px;
-            "
-        ></button>
-        <div id="theme-color-menu"></div>
+    <h5>Theme Color</h5>
+    <button
+        id="theme-color-picker"
+        style="background-color: var(--theme-color); width: 50px; height: 50px"
+    ></button>
+    <div id="theme-color-menu"></div>
 
-        <h5>Background Color</h5>
-        <button
-            id="theme-background-color-picker"
-            style="
-                background-color: var(--theme-background-color);
-                width: 50px;
-                height: 50px;
-            "
-        ></button>
-        <div id="theme-background-color-menu"></div>
+    <h5>Background Color</h5>
+    <button
+        id="theme-background-color-picker"
+        style="
+            background-color: var(--theme-background-color);
+            width: 50px;
+            height: 50px;
+        "
+    ></button>
+    <div id="theme-background-color-menu"></div>
 
-        <h5>Background Image</h5>
-        <input id="input-settings-theme-background-image" />
-        <button
-            id="btn-settings-theme-background-image-save"
-            class="btn btn-success"
-        >
-            Save
-        </button>
-        <button id="btn-settings-theme-background-image-default" class="btn">
-            Default
-        </button>
-        <button
-            id="btn-settings-theme-background-image-clear"
-            class="btn btn-error"
-        >
-            Clear
-        </button>
+    <h5>Background Image</h5>
+    <input id="input-settings-theme-background-image" />
+    <button
+        id="btn-settings-theme-background-image-save"
+        class="btn btn-success"
+    >
+        Save
+    </button>
+    <button id="btn-settings-theme-background-image-default" class="btn">
+        Default
+    </button>
+    <button
+        id="btn-settings-theme-background-image-clear"
+        class="btn btn-error"
+    >
+        Clear
+    </button>
 
-        <h5>Data</h5>
-        <p id="text-settings-data-size">Storage Size: INVALID kb</p>
-        <br />
-        <button id="btn-settings-data-delete" class="btn btn-error">
-            Delete Data
-        </button>
-    </div>
+    <h5>Data</h5>
+    <p id="text-settings-data-size">Storage Size: INVALID kb</p>
+    <br />
+    <button id="btn-settings-data-delete" class="btn btn-error">
+        Delete Data
+    </button>
 </div>

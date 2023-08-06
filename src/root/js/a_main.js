@@ -17,7 +17,9 @@ import("./test.js");
 
 import("./micromodal.js");
 import "./setup.js";
-var OptionalModules = ["./settings.js"];
+import("./settings.js");
+
+var OptionalModules = [];
 
 async function getFileContentAsText(file) {
     const response = await fetch(file);
@@ -25,18 +27,28 @@ async function getFileContentAsText(file) {
     return fileContent;
 }
 
-insertContentsFromFiles();
-window.Setup.LoadSetupWindow();
+window.onload = function () {
+    console.log("Initialize home");
+
+    if (window.IsExtension) {
+        $("#dropdown-version")[0].textContent =
+            "v" + chrome.runtime.getManifest().version;
+    }
+
+    getClockTime();
+    setInterval(getClockTime, 15000);
+    insertContentsFromFiles();
+};
+
+//insertContentsFromFiles();
+//window.Setup.LoadSetupWindow();
 async function insertContentsFromFiles() {
-    console.log("Load files");
     const tbl = document.querySelectorAll("[data-src]");
     for (var i = 0; i < tbl.length; i++) {
         try {
             tbl[i].outerHTML = await getFileContentAsText(tbl[i].dataset.src);
         } catch {}
     }
-
-    window.Data.LoadSettingsPanel();
 
     OptionalModules.forEach((element) => {
         import(element);
@@ -197,18 +209,6 @@ async function ModalSuccesLinkCreate(data) {
 
     //window.GlobalSort.sort(function (item) {});
 }
-
-window.onload = function () {
-    console.log("Initialize home");
-
-    if (window.IsExtension) {
-        $("#dropdown-version")[0].textContent =
-            "v" + chrome.runtime.getManifest().version;
-    }
-
-    getClockTime();
-    setInterval(getClockTime, 15000);
-};
 
 function getClockTime() {
     var now = new Date();

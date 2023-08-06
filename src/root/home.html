@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="theme-">
+<html lang="en" class="">
     <head>
         <title>Home Page</title>
         <meta charset="utf-8" />
@@ -59,34 +59,39 @@
             </div>
         </header>
 
-        <div id="body" class="page-body">
-            <div class="section sortable-list"></div>
+        <div id="body">
+            <div id="page-panel-left"></div>
+            <div class="page-body">
+                <div class="section sortable-list"></div>
 
-            <div class="widget widget-clock">
-                <div class="widget-inner" draggable="false">
-                    <h3 id="clock" style="color: white">00:00</h3>
+                <div class="widget widget-clock">
+                    <div class="widget-inner" draggable="false">
+                        <h3 id="clock" style="color: white">00:00</h3>
+                    </div>
+                </div>
+
+                <div id="btn-add" class="widget">
+                    <div class="widget-inner">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="#7ec884"
+                                d="M20 14h-6v6h-4v-6H4v-4h6V4h4v6h6v4Z"
+                            />
+                        </svg>
+                    </div>
                 </div>
             </div>
-
-            <div id="btn-add" class="widget">
-                <div class="widget-inner">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="#7ec884"
-                            d="M20 14h-6v6h-4v-6H4v-4h6V4h4v6h6v4Z"
-                        />
-                    </svg>
-                </div>
+            <div id="page-panel-right">
+                <div class="panel-inner"></div>
             </div>
         </div>
 
         <div style="display: none" data-src="parts/modals.html"></div>
-        <div style="display: none" data-src="parts/settings.html"></div>
         <div style="display: none" data-srco="parts/setup.html"></div>
         <script src="./js/a_main.js" type="module"></script>
     </body>

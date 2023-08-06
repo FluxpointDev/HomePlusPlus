@@ -3,24 +3,15 @@ document
     .addEventListener("click", (elm) => Dropdown_OptionSettings(elm.target));
 
 async function Dropdown_OptionSettings(element) {
-    console.log("Dropdown clicked");
-    console.log(element);
+    var DropdownContent = $("#nav-dropdown")[0].innerHTML;
+    $("#nav-dropdown")[0].children[1].style.display = "none";
+
     switch (element.id) {
         case "dropdown-settings":
             {
-                window.Settings.UpdateDataSize();
-                $("#SettingsPanel")[0].classList.add("panel-show");
+                window.Settings.OpenSettingsPanel();
 
-                return;
-
-                if (!window.IsExtension) {
-                    MicroModal.showError(
-                        "Addon Error",
-                        "Addon has not been installed."
-                    );
-                    return;
-                }
-                chrome.runtime.openOptionsPage();
+                // chrome.runtime.openOptionsPage();
             }
             break;
         case "dropdown-about":
@@ -72,6 +63,9 @@ async function Dropdown_OptionSettings(element) {
             }
             break;
     }
+    setTimeout(function () {
+        $("#nav-dropdown")[0].children[1].style.display = "";
+    }, 1);
 }
 
 function ModalClose(data) {

@@ -4,6 +4,7 @@
 .dropdown-content {
     display: none;
     position: absolute;
+    z-index: 1;
     padding: 6px;
     padding-bottom: 2px;
     border-radius: 6px;

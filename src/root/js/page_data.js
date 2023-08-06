@@ -61,7 +61,7 @@ function LoadItems() {
 
     import("./context.js");
 
-    //window.GlobalSort.sort(function (item) {});
+    window.GlobalSort.sort(function (item) {});
 }
 
 async function Page_Load(page_key) {

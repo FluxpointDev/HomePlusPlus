@@ -1,4 +1,4 @@
-.panel {
+.panel2 {
     position: fixed;
     top: 0;
     right: 0;
@@ -7,7 +7,8 @@
     margin-top: 45px;
     color: white;
 }
-.panel-inner {
+
+.panel2-inner {
     margin: 6px;
     padding-top: 8px;
     padding-left: 8px;

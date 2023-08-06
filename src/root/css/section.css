@@ -1,17 +1,17 @@
+.section {
+    display: grid;
+    grid-gap: 6px;
+    grid-template-columns: repeat(auto-fill, 146px);
+}
 .section a {
     text-decoration: none !important;
 }
 .widget {
     transition: all 0.2s ease-in-out 0s;
     display: inline-block;
-    width: 110px;
-    height: 80px;
-    vertical-align: top;
+    width: 120px;
+    height: 90px;
     text-align: center;
-    padding: 6px 8px;
-    border-radius: 4px;
-    margin-right: 4px;
-    margin-bottom: 4px;
     cursor: pointer;
 }
 .widget:hover {
@@ -38,9 +38,9 @@
     margin-top: 4px;
     padding-left: 4px;
     padding-right: 4px;
-    font-size: 13px;
+    font-size: 10.5pt !important;
+    font-family: Segoe UI !important;
     font-weight: 600;
-    font-family: Tahoma;
     height: 40px;
     text-align: center;
     overflow: hidden;
@@ -75,13 +75,9 @@
 }
 
 .sortable-list .widget {
-    align-items: center;
     border-radius: 5px;
     padding: 10px 13px;
-    margin-bottom: 11px;
     /* box-shadow: 0 2px 4px rgba(0,0,0,0.06); */
-
-    justify-content: space-between;
 }
 .widget.dragging {
     cursor: move !important;
