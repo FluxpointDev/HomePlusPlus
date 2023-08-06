@@ -4,7 +4,7 @@ window.Context = {
 
 var i = document.getElementById("menu").style;
 
-var Page = document.getElementById("body");
+var Page = document.getElementsByClassName("page-body")[0];
 
 var LastElement;
 

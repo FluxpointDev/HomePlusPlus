@@ -61,7 +61,6 @@ function LoadItems() {
     }
 
     import("./context.js");
-
     //window.GlobalSort.sort(function (item) {});
 }
 
