@@ -99,9 +99,10 @@ function OpenModals() {
 }
 
 function OpenCreateModal() {
-    MicroModal.show("modal-create", {
-        okTrigger: (data) => ModalSuccess(data),
-    });
+    ModalSuccess("");
+    //MicroModal.show("modal-create", {
+    //    okTrigger: (data) => ModalSuccess(data),
+    //});
 }
 
 function OpenPageModal() {
@@ -124,9 +125,6 @@ function OpenPageModal() {
 }
 
 function ModalSuccess(data) {
-    console.log("Modal success page");
-    console.log(data);
-
     MicroModal.show("modal-link-create", {
         okTrigger: (data) => ModalSuccesLinkCreate(data),
     });
