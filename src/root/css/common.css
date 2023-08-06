@@ -106,15 +106,16 @@ header {
     -moz-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
 
-    width: 130px;
+    width: 170px;
     padding: 1px;
     padding-top: 4px;
+    border-radius: 4px;
 }
 #menu div {
     display: block;
     color: var(--context-text-color) !important;
     text-decoration: none;
-    padding: 6px 8px 6px 30px;
+    padding: 8px 10px 8px 10px;
     position: relative;
     cursor: pointer;
     margin-bottom: 3px;
@@ -123,9 +124,12 @@ header {
     background-color: var(--context-item-background-hover-color) !important;
     color: var(--context-text-color) !important;
 }
+
 #menu hr {
-    border: 1px solid #ebebeb;
-    border-bottom: 0;
+    margin-bottom: 3px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-color: var(--context-item-background-hover-color) !important;
 }
 
 .btn {
