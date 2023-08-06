@@ -9,7 +9,8 @@ window.CurrentPage = {
     },
 };
 
-await Load_Data();
+Load_Data();
+
 async function Load_Data() {
     var JsonContent = window.Data.getItem(window.CurrentPage.PageKey);
     if (JsonContent) {
