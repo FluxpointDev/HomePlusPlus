@@ -102,9 +102,9 @@ header {
     color: var(--context-text-color) !important;
     border: 1px solid var(--context-item-background-hover-color);
 
-    -webkit-transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.1s ease-in-out;
+    -moz-transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.1s ease-in-out;
 
     width: 170px;
     padding: 1px;

@@ -25,21 +25,44 @@ document.addEventListener(
         i.opacity = "0";
         setTimeout(function () {
             i.visibility = "hidden";
-        }, 501);
-
-        console.log(e.target);
-
-        if (e.target.textContent !== "Delete") return;
+        }, 60);
 
         if (
-            LastElement.tagName === "DIV" &&
-            LastElement.id.startsWith("widget-")
+            LastElement.tagName !== "DIV" ||
+            !LastElement.id.startsWith("widget-")
         ) {
-            LastElement.remove();
-            delete window.CurrentPage.PageData.sections[
-                $(".section")[0].id.split("-")[1]
-            ].widgets[LastElement.id.split("-")[1]];
-            window.CurrentPage.Save();
+            return;
+        }
+
+        switch (e.target.id) {
+            case "ContextLinkDelete":
+                {
+                    LastElement.remove();
+                    delete window.CurrentPage.PageData.sections[
+                        $(".section")[0].id.split("-")[1]
+                    ].widgets[LastElement.id.split("-")[1]];
+                    window.CurrentPage.Save();
+                }
+                break;
+            case "ContextLinkOpenTab":
+                {
+                    window.open(LastElement.firstChild.href);
+                }
+                break;
+            case "ContextLinkCopy":
+                {
+                    var text = LastElement.firstChild.href;
+
+                    navigator.clipboard.writeText(text).then(
+                        () => {
+                            /* success */
+                        },
+                        () => {
+                            /* failure */
+                        }
+                    );
+                }
+                break;
         }
     },
     false
