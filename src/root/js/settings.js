@@ -112,7 +112,7 @@ async function UpdateBackgroundImage() {
 }
 
 function DefaultBackgroundImage() {
-    window.Data.Settings.Theme.BackgroundImage = "background.jpg";
+    window.Data.Settings.Theme.BackgroundImage = "background.webp";
     window.Data.Settings.Theme.BackgroundImagePrimaryColor = null;
     window.Data.Save();
 

@@ -3,7 +3,7 @@ window.Data = {
         Theme: {
             Mode: "dark",
             BackgroundColor: "#2b2b36",
-            BackgroundImage: "background.jpg",
+            BackgroundImage: "background.webp",
             BackgroundImagePrimaryColor: "",
             NavbarUseBackgroundColor: false,
             NavbarColor: "#666E99",

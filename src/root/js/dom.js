@@ -87,10 +87,13 @@ function hexToRgb(hex) {
 function LoadBackground() {
     if (window.Data.Settings.Theme.BackgroundImage) {
         document.documentElement.classList.add("html-background");
-        if (window.Data.Settings.Theme.BackgroundImage === "background.jpg") {
+        if (
+            window.Data.Settings.Theme.BackgroundImage === "background.jpg" ||
+            window.Data.Settings.Theme.BackgroundImage === "background.webp"
+        ) {
             SetDocumentStyle(
                 "background-image",
-                "url('parts/background.jpg'), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))"
+                "url('parts/background.webp'), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))"
             );
         } else {
             SetDocumentStyle(
