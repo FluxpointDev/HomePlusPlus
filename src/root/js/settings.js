@@ -98,11 +98,43 @@ function UpdateDataSize() {
 }
 
 async function UpdateBackgroundImage() {
-    var WebURL = $("#input-settings-theme-background-image")[0].value;
+    var b64 = null;
+    if (
+        $("#input-settings-theme-background-image-file")[0].files.length !== 0
+    ) {
+        if (
+            $("#input-settings-theme-background-image-file")[0].files[0].size >
+            1000000
+        ) {
+            MicroModal.showError(
+                "Upload Limit",
+                "You can only upload an image less than 1 MB."
+            );
+            return;
+        }
 
-    if (typeof WebURL === "undefined") return;
+        var ImageArray = await $(
+            "#input-settings-theme-background-image-file"
+        )[0].files[0].arrayBuffer();
 
-    var b64 = await window.Http.GetImageBase64(WebURL);
+        var b64 = await window.Http.GetImageFormBase64("", {
+            Image: ImageArray,
+            Type: $("#input-settings-theme-background-image-file")[0].files[0]
+                .type,
+        });
+    } else {
+        var WebURL = $("#input-settings-theme-background-image")[0].value;
+
+        if (WebURL !== "undefined") {
+            MicroModal.showError(
+                "URL Required",
+                "You need to enter an image url to show as background."
+            );
+        }
+        if (typeof WebURL === "undefined") return;
+
+        var b64 = await window.Http.GetImageBase64(WebURL);
+    }
 
     window.Data.Settings.Theme.BackgroundImage = b64.Image;
     window.Data.Settings.Theme.BackgroundImagePrimaryColor = b64.Color;
