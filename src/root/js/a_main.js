@@ -19,7 +19,7 @@ import("./micromodal.js");
 import "./setup.js";
 import("./settings.js");
 
-var OptionalModules = [];
+var OptionalModules = ["./json_editor-min.js"];
 
 async function getFileContentAsText(file) {
     const response = await fetch(file);
@@ -39,6 +39,10 @@ window.onload = function () {
     setInterval(getClockTime, 15000);
     insertContentsFromFiles();
 };
+
+function TestFunctionHere() {
+    console.log("Test function");
+}
 
 //insertContentsFromFiles();
 //window.Setup.LoadSetupWindow();

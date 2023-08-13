@@ -2,9 +2,12 @@ document
     .getElementById("nav-dropdown")
     .addEventListener("click", (elm) => Dropdown_OptionSettings(elm.target));
 
+let EnableDebugCount = 0;
+
 async function Dropdown_OptionSettings(element) {
-    var DropdownContent = $("#nav-dropdown")[0].innerHTML;
-    $("#nav-dropdown")[0].children[1].style.display = "none";
+    if (element.tagName !== "p") {
+        $("#nav-dropdown")[0].children[1].style.display = "none";
+    }
 
     switch (element.id) {
         case "dropdown-settings":
@@ -59,7 +62,40 @@ async function Dropdown_OptionSettings(element) {
                         Build: ${BrowserBuild}<br /><br />
                         OS: ${Platform.os} (${Platform.arch})`
                 );
-                return;
+            }
+            break;
+        case "dropdown-version":
+            {
+                EnableDebugCount += 1;
+                if (EnableDebugCount >= 3) {
+                    window.Data.Settings.Debug = !window.Data.Settings.Debug;
+                    window.Data.Save();
+                    window.DOM.ToggleDebugOptions();
+                }
+            }
+            break;
+        case "dropdown-debug-settings":
+            {
+                MicroModal.showOption(
+                    "Settings Json",
+                    "<div id='json-viewer'></div>",
+                    {
+                        okTrigger: (data) => JsonSaveSettings(data),
+                    }
+                );
+                new JsonEditor("#json-viewer", window.Data.Settings);
+            }
+            break;
+        case "dropdown-debug-page":
+            {
+                MicroModal.showOption(
+                    "Page Json",
+                    "<div id='json-viewer'></div>",
+                    {
+                        okTrigger: (data) => JsonSaveSettings(data),
+                    }
+                );
+                new JsonEditor("#json-viewer", window.CurrentPage.PageData);
             }
             break;
     }
@@ -67,6 +103,8 @@ async function Dropdown_OptionSettings(element) {
         $("#nav-dropdown")[0].children[1].style.display = "";
     }, 1);
 }
+
+function JsonSaveSettings() {}
 
 function ModalClose(data) {
     console.log("Modal close");

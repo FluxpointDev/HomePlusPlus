@@ -54,7 +54,20 @@ window.DOM = {
         return Object;
     },
     LoadBackground: () => LoadBackground(),
+    ToggleDebugOptions: () => ToggleDebugOptions(),
 };
+
+function ToggleDebugOptions() {
+    var Options = ["#dropdown-debug-settings", "#dropdown-debug-page"];
+
+    Options.forEach((element) => {
+        if (window.Data.Settings.Debug) {
+            $(element)[0].style = "";
+        } else {
+            $(element)[0].style = "display: none;";
+        }
+    });
+}
 
 function Object_CreateWidgetLink(data, main) {
     var Image = document.createElement("img");

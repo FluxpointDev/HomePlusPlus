@@ -1,5 +1,6 @@
 window.Data = {
     Settings: {
+        Debug: false,
         Theme: {
             Mode: "dark",
             BackgroundColor: "#2b2b36",
@@ -96,6 +97,9 @@ async function LoadSettings() {
         }
     }
     window.DOM.LoadBackground();
+    if (window.Data.Settings.Debug) {
+        window.DOM.ToggleDebugOptions();
+    }
 }
 
 function ThemeModeChanged() {}

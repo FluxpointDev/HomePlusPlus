@@ -179,3 +179,7 @@ checkbox {
     border-color: #3a474d !important;
     box-sizing: border-box;
 }
+
+#json-viewer span {
+    overflow-wrap: break-word !important;
+}
