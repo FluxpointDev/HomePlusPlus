@@ -1,3 +1,5 @@
+import Data from "./DataModule.js";
+
 window.Settings = {
     OpenSettingsPanel: () => OpenSettingsPanel(),
     UpdateDataSize: () => UpdateDataSize(),
@@ -19,12 +21,12 @@ async function OpenSettingsPanel() {
     window.Settings.HasPanelHandle = true;
     UpdateDataSize();
 
-    if (window.Data.Settings.Theme.Mode !== $("#select-theme-mode")[0].value) {
-        $("#select-theme-mode")[0].value = window.Data.Settings.Theme.Mode;
+    if (Data.Settings.Theme.Mode !== $("#select-theme-mode")[0].value) {
+        $("#select-theme-mode")[0].value = Data.Settings.Theme.Mode;
     }
 
     PickerThemeColor = LoadThemePicker(
-        window.Data.Settings.Theme.Color,
+        Data.Settings.Theme.Color,
         "#theme-color-picker",
         "#theme-color-menu",
         ["#479cd0", "#fd3585", "#be5b31", "#1aa056"]
@@ -32,12 +34,12 @@ async function OpenSettingsPanel() {
 
     PickerThemeColor.on("change", function (colorObject, source) {
         SetDocumentStyle("--theme-color", colorObject.hex);
-        window.Data.Settings.Theme.Color = colorObject.hex;
-        window.Data.Save();
+        Data.Settings.Theme.Color = colorObject.hex;
+        Data.Save();
     });
 
     PickerBackgroundColor = LoadThemePicker(
-        window.Data.Settings.Theme.BackgroundColor,
+        Data.Settings.Theme.BackgroundColor,
         "#theme-background-color-picker",
         "#theme-background-color-menu",
         ["#161719"]
@@ -45,8 +47,8 @@ async function OpenSettingsPanel() {
 
     PickerBackgroundColor.on("change", function (colorObject, source) {
         SetDocumentStyle("--theme-background-color", colorObject.hex);
-        window.Data.Settings.Theme.BackgroundColor = colorObject.hex;
-        window.Data.Save();
+        Data.Settings.Theme.BackgroundColor = colorObject.hex;
+        Data.Save();
     });
 
     $("#btn-settings-theme-background-image-save")[0].addEventListener(
@@ -136,51 +138,49 @@ async function UpdateBackgroundImage() {
         var b64 = await window.Http.GetImageBase64(WebURL);
     }
 
-    window.Data.Settings.Theme.BackgroundImage = b64.Image;
-    window.Data.Settings.Theme.BackgroundImagePrimaryColor = b64.Color;
-    window.Data.Save();
+    Data.Settings.Theme.BackgroundImage = b64.Image;
+    Data.Settings.Theme.BackgroundImagePrimaryColor = b64.Color;
+    Data.Save();
 
     DOM.LoadBackground();
 }
 
 function DefaultBackgroundImage() {
-    window.Data.Settings.Theme.BackgroundImage = "background.webp";
-    window.Data.Settings.Theme.BackgroundImagePrimaryColor = null;
-    window.Data.Save();
+    Data.Settings.Theme.BackgroundImage = "background.webp";
+    Data.Settings.Theme.BackgroundImagePrimaryColor = null;
+    Data.Save();
 
     DOM.LoadBackground();
 }
 
 function ClearBackgroundImage() {
-    window.Data.Settings.Theme.BackgroundImage = null;
-    window.Data.Settings.Theme.BackgroundImagePrimaryColor = null;
-    window.Data.Save();
+    Data.Settings.Theme.BackgroundImage = null;
+    Data.Settings.Theme.BackgroundImagePrimaryColor = null;
+    Data.Save();
 
     DOM.LoadBackground();
 }
 
 function ThemeModeChange() {
-    window.Data.Settings.Theme.Mode = this.value;
-    if (window.Data.Settings.Theme.Mode === "dark") {
+    Data.Settings.Theme.Mode = this.value;
+    if (Data.Settings.Theme.Mode === "dark") {
         document.body.classList.add("theme-dark");
         document.body.classList.remove("theme-light");
     } else {
         document.body.classList.add("theme-light");
         document.body.classList.remove("theme-dark");
     }
-    window.Data.Save();
+    Data.Save();
 
-    PickerThemeColor.setOptions({ theme: window.Data.Settings.Theme.Mode });
+    PickerThemeColor.setOptions({ theme: Data.Settings.Theme.Mode });
     PickerBackgroundColor.setOptions({
-        theme: window.Data.Settings.Theme.Mode,
+        theme: Data.Settings.Theme.Mode,
     });
-
-    window.Data.ThemeModeChanged();
 }
 
 function LoadThemePicker(setting, button, menu, defaults) {
     return new Alwan(button, {
-        theme: window.Data.Settings.Theme.Mode === "dark" ? "dark" : "light",
+        theme: Data.Settings.Theme.Mode,
         toggle: true,
         color: setting,
         popover: false,

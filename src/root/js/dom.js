@@ -1,6 +1,5 @@
-window.IsExtension = typeof chrome !== "undefined";
-window.IsFirefox = navigator.userAgent.indexOf("Firefox") > 0;
-window.IsChrome = navigator.userAgent.indexOf("Chrome") > 0;
+import Data from "./DataModule.js";
+import Utils from "./UtilsModule.js";
 
 window.DOM = {
     CreateWidget: function DOM_CreateWidget(data) {
@@ -14,7 +13,7 @@ window.DOM = {
 
         Inner.setAttribute("draggable", "false");
         if (data.color) {
-            var RGB = hexToRgb(data.color);
+            var RGB = Utils.HexToRGB(data.color) || "255,255,255";
             RGB += ",0.3";
             Inner.style.setProperty("background-color", "RGBA(" + RGB + ")");
         }
@@ -61,7 +60,7 @@ function ToggleDebugOptions() {
     var Options = ["#dropdown-debug-settings", "#dropdown-debug-page"];
 
     Options.forEach((element) => {
-        if (window.Data.Settings.Debug) {
+        if (Data.Settings.Debug) {
             $(element)[0].style = "";
         } else {
             $(element)[0].style = "display: none;";
@@ -81,28 +80,12 @@ function Object_CreateWidgetLink(data, main) {
     return main;
 }
 
-function hexToRgb(hex) {
-    if (hex) {
-        if (hex[0] === "#") {
-            hex = hex.substring(1);
-        }
-
-        var bigint = parseInt(hex, 16);
-        var r = (bigint >> 16) & 255;
-        var g = (bigint >> 8) & 255;
-        var b = bigint & 255;
-
-        return r + "," + g + "," + b;
-    }
-    return "255,255,255";
-}
-
 function LoadBackground() {
-    if (window.Data.Settings.Theme.BackgroundImage) {
+    if (Data.Settings.Theme.BackgroundImage) {
         document.documentElement.classList.add("html-background");
         if (
-            window.Data.Settings.Theme.BackgroundImage === "background.jpg" ||
-            window.Data.Settings.Theme.BackgroundImage === "background.webp"
+            Data.Settings.Theme.BackgroundImage === "background.jpg" ||
+            Data.Settings.Theme.BackgroundImage === "background.webp"
         ) {
             SetDocumentStyle(
                 "background-image",
@@ -112,7 +95,7 @@ function LoadBackground() {
             SetDocumentStyle(
                 "background-image",
                 "url('" +
-                    window.Data.Settings.Theme.BackgroundImage +
+                    Data.Settings.Theme.BackgroundImage +
                     "'), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))"
             );
         }

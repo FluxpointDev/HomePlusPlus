@@ -1,11 +1,18 @@
 // Do not set window objects here
 
+window.IsExtension = typeof chrome !== "undefined";
+window.IsFirefox = navigator.userAgent.indexOf("Firefox") > 0;
+window.IsChrome = navigator.userAgent.indexOf("Chrome") > 0;
+
+import StorageHelper from "./StorageHelper.js";
+import Utils from "./UtilsModule.js";
+
 import "./purify-min.js";
 import "./toast-min.js";
 import "./jquery-min.js";
 import "./dom.js";
 
-import "./data.js";
+import Data from "./DataModule.js";
 import "./http.js";
 import "./colorpicker-min.js";
 
@@ -17,7 +24,9 @@ import("./test.js");
 
 import("./micromodal.js");
 import "./setup.js";
+
 import("./settings.js");
+Data.LoadSettings();
 
 var OptionalModules = ["./json_editor-min.js"];
 
@@ -111,7 +120,7 @@ function OpenCreateModal() {
 
 function OpenPageModal() {
     var pageCount = 0;
-    for (let [key, value] of window.Data.getAll()) {
+    for (let [key, value] of StorageHelper.GetAllItems()) {
         if (key.startsWith("page-")) {
             pageCount += 1;
         }
@@ -179,7 +188,7 @@ async function ModalSuccesLinkCreate(data) {
 
     if (Link.includes("://localhost") || Link.includes("://127.0.0.1")) {
         Data = {
-            id: randomString(),
+            id: Utils.GenerateRandomID(),
             name: "Localhost",
             link: Link,
             type: "link",
@@ -191,7 +200,7 @@ async function ModalSuccesLinkCreate(data) {
         var Json = await window.Http.GetFaviconBase64(Link);
 
         Data = {
-            id: randomString(),
+            id: Utils.GenerateRandomID(),
             name: Json.Name,
             link: Link,
             type: "link",
@@ -234,22 +243,4 @@ function getClockTime() {
     }
     var timeString = hour + ":" + minute + " " + meridiem;
     document.getElementById("clock").textContent = timeString;
-}
-
-function randomString() {
-    var length = 10;
-    var chars =
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz".split(
-            ""
-        );
-
-    if (!length) {
-        length = Math.floor(Math.random() * chars.length);
-    }
-
-    var str = "";
-    for (var i = 0; i < length; i++) {
-        str += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return str;
 }

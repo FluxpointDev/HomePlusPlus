@@ -266,8 +266,6 @@
             };
         return {
             init: function (e) {
-                console.log("Actual INT");
-                console.log(e);
                 var i = Object.assign(
                         {},
                         { openTrigger: "data-micromodal-trigger" },

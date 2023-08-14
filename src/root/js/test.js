@@ -1,3 +1,5 @@
+import Data from "./DataModule.js";
+
 document
     .getElementById("nav-dropdown")
     .addEventListener("click", (elm) => Dropdown_OptionSettings(elm.target));
@@ -68,8 +70,8 @@ async function Dropdown_OptionSettings(element) {
             {
                 EnableDebugCount += 1;
                 if (EnableDebugCount >= 3) {
-                    window.Data.Settings.Debug = !window.Data.Settings.Debug;
-                    window.Data.Save();
+                    Data.Settings.Debug = !Data.Settings.Debug;
+                    Data.Save();
                     window.DOM.ToggleDebugOptions();
                 }
             }
@@ -83,7 +85,7 @@ async function Dropdown_OptionSettings(element) {
                         okTrigger: (data) => JsonSaveSettings(data),
                     }
                 );
-                new JsonEditor("#json-viewer", window.Data.Settings);
+                new JsonEditor("#json-viewer", Data.Settings);
             }
             break;
         case "dropdown-debug-page":
@@ -96,6 +98,13 @@ async function Dropdown_OptionSettings(element) {
                     }
                 );
                 new JsonEditor("#json-viewer", window.CurrentPage.PageData);
+            }
+            break;
+        case "dropdown-request-topsite":
+            {
+                chrome.permissions.request({
+                    permissions: ["topSites"],
+                });
             }
             break;
     }

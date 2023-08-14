@@ -1,10 +1,14 @@
+import Data from "./DataModule.js";
+import StorageHelper from "./StorageHelper.js";
+import Utils from "./UtilsModule.js";
+
 window.CurrentPage = {
     PageKey: "page-home",
     PageData: null,
     Save: function PageData_Save() {
-        window.Data.setItem(
+        StorageHelper.SaveData(
             window.CurrentPage.PageKey,
-            JSON.stringify(window.CurrentPage.PageData)
+            window.CurrentPage.PageData
         );
     },
 };
@@ -12,16 +16,15 @@ window.CurrentPage = {
 Load_Data();
 
 async function Load_Data() {
-    var JsonContent = window.Data.getItem(window.CurrentPage.PageKey);
+    var JsonContent = StorageHelper.GetLocalData(window.CurrentPage.PageKey);
     if (JsonContent) {
     } else if (window.IsExtension) {
         if (window.CurrentPage.PageKey === "page-home") {
-            console.log("Loading pages from extension data.");
             var BackupPages = await chrome.storage.local.get(null);
 
             for (let [key, value] of Object.entries(BackupPages)) {
                 if (key.startsWith("page-")) {
-                    window.Data.setItem(key, value);
+                    StorageHelper.SaveData(key, value);
                 }
             }
         }
@@ -69,7 +72,7 @@ async function Page_Load(page_key) {
         // $(this).remove();
     });
 
-    var JsonContent = window.Data.getItem(page_key);
+    var JsonContent = StorageHelper.GetLocalData(page_key);
     if (JsonContent) {
         window.CurrentPage.PageData = JSON.parse(JsonContent);
     }
@@ -82,7 +85,7 @@ async function Page_Load(page_key) {
         window.CurrentPage.PageData = {};
         window.CurrentPage.PageData.id = "home";
         window.CurrentPage.PageData.name = "Home";
-        var SectionId = randomString();
+        var SectionId = Utils.GenerateRandomID();
         window.CurrentPage.PageData.sections = {};
 
         if (page_key === "page-home") {
@@ -90,9 +93,9 @@ async function Page_Load(page_key) {
                 id: SectionId,
                 widgets: {},
             };
-            window.Data.setItem(
+            StorageHelper.SaveData(
                 window.CurrentPage.PageKey,
-                JSON.stringify(window.CurrentPage.PageData)
+                window.CurrentPage.PageData
             );
         }
     }
@@ -112,22 +115,4 @@ function Page_Delete() {
     }
 
     $("#nav-" + CurrentPage.PageKey).remove();
-}
-
-function randomString() {
-    var length = 10;
-    var chars =
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz".split(
-            ""
-        );
-
-    if (!length) {
-        length = Math.floor(Math.random() * chars.length);
-    }
-
-    var str = "";
-    for (var i = 0; i < length; i++) {
-        str += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return str;
 }
