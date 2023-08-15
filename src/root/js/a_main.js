@@ -1,31 +1,27 @@
 // Do not set window objects here
 
-window.IsExtension = typeof chrome !== "undefined";
-window.IsFirefox = navigator.userAgent.indexOf("Firefox") > 0;
-window.IsChrome = navigator.userAgent.indexOf("Chrome") > 0;
-
-import StorageHelper from "./StorageHelper.js";
-import Utils from "./UtilsModule.js";
-
+// Important defaults
+import "./jquery-min.js";
 import "./purify-min.js";
 import "./toast-min.js";
-import "./jquery-min.js";
-import "./dom.js";
 
-import Data from "./DataModule.js";
-import "./http.js";
+// Basic modules
+import Utils from "./UtilsModule.js";
+import StorageHelper from "./StorageHelper.js";
+import Http from "./HttpModule.js";
+import Data from "./DataModule.js"; // Requires StorageHelper
+import DOM from "./DomModule.js"; // Requires Utils and Data
+
+// Extra modules
 import "./colorpicker-min.js";
-
 import "./order.js";
-
-import "./page_data.js";
-
-import("./test.js");
-
+import "./page_data.js"; // Requires StorageHelper, Utils and DOM
+import("./test.js"); // Requires DOM and Data
 import("./micromodal.js");
 import "./setup.js";
+import("./settings.js"); // Requires Data and Http
 
-import("./settings.js");
+// Load settings data
 Data.LoadSettings();
 
 var OptionalModules = ["./json_editor-min.js"];
@@ -197,7 +193,7 @@ async function ModalSuccesLinkCreate(data) {
             position: 0,
         };
     } else {
-        var Json = await window.Http.GetFaviconBase64(Link);
+        var Json = await Http.GetFaviconBase64(Link);
 
         Data = {
             id: Utils.GenerateRandomID(),
@@ -215,7 +211,7 @@ async function ModalSuccesLinkCreate(data) {
 
     var sortableList = document.querySelector(".sortable-list");
 
-    sortableList.append(window.DOM.CreateWidget(Data));
+    sortableList.append(DOM.CreateWidget(Data));
     window.CurrentPage.Save();
 
     //window.GlobalSort.sort(function (item) {});

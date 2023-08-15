@@ -1,4 +1,9 @@
 class UtilsModule {
+    constructor() {
+        window.IsExtension = typeof chrome !== "undefined";
+        window.IsFirefox = navigator.userAgent.indexOf("Firefox") > 0;
+        window.IsChrome = navigator.userAgent.indexOf("Chrome") > 0;
+    }
     HexToRGB(hex) {
         if (hex.startsWith("#")) {
             hex = hex.substring(1);
@@ -13,6 +18,18 @@ class UtilsModule {
 
     SetDocumentStyle(key, style) {
         document.documentElement.style.setProperty(key, style);
+    }
+
+    AddDocumentClass(key) {
+        document.documentElement.classList.add(key);
+    }
+
+    RemoveDocumentClass(key) {
+        document.documentElement.classList.remove(key);
+    }
+
+    RemoveDocumentStyle(key) {
+        document.documentElement.style.removeProperty(key);
     }
 
     GenerateRandomID() {

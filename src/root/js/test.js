@@ -1,4 +1,5 @@
 import Data from "./DataModule.js";
+import DOM from "./DomModule.js";
 
 document
     .getElementById("nav-dropdown")

@@ -1,4 +1,5 @@
 import Data from "./DataModule.js";
+import Http from "./HttpModule.js";
 
 window.Settings = {
     OpenSettingsPanel: () => OpenSettingsPanel(),
@@ -119,7 +120,7 @@ async function UpdateBackgroundImage() {
             "#input-settings-theme-background-image-file"
         )[0].files[0].arrayBuffer();
 
-        var b64 = await window.Http.GetImageFormBase64("", {
+        var b64 = await Http.GetBackgroundUploadBase64({
             Image: ImageArray,
             Type: $("#input-settings-theme-background-image-file")[0].files[0]
                 .type,
@@ -135,7 +136,7 @@ async function UpdateBackgroundImage() {
         }
         if (typeof WebURL === "undefined") return;
 
-        var b64 = await window.Http.GetImageBase64(WebURL);
+        var b64 = await Http.GetImageBase64(WebURL);
     }
 
     Data.Settings.Theme.BackgroundImage = b64.Image;

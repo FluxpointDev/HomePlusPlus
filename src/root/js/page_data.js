@@ -1,6 +1,6 @@
-import Data from "./DataModule.js";
 import StorageHelper from "./StorageHelper.js";
 import Utils from "./UtilsModule.js";
+import DOM from "./DomModule.js";
 
 window.CurrentPage = {
     PageKey: "page-home",
@@ -60,7 +60,7 @@ function LoadItems() {
     for (let [key, value] of Object.entries(
         Object.values(window.CurrentPage.PageData.sections)[0].widgets
     )) {
-        sortableList.append(window.DOM.CreateWidget(value));
+        sortableList.append(DOM.CreateWidget(value));
     }
 
     import("./context.js");

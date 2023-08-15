@@ -1,7 +1,8 @@
 import StorageHelper from "./StorageHelper.js";
 
-class DataModule {
+class Data {
     constructor() {
+        console.log(window.IsFirefox);
         this.Settings = {
             Debug: false,
             Theme: {
@@ -89,4 +90,4 @@ class DataModule {
     }
 }
 
-export default new DataModule();
+export default new Data();
