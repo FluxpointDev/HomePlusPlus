@@ -1,14 +1,16 @@
+import Page from "./PageModule.js";
+
 window.Context = {
     AddContextMenu: (element) => AddContext(element),
 };
 
 var i = document.getElementById("menu").style;
 
-var Page = document.getElementsByClassName("page-body")[0];
+var PageBody = document.getElementsByClassName("page-body")[0];
 
 var LastElement;
 
-Page.childNodes.forEach((element) => {
+PageBody.childNodes.forEach((element) => {
     if (element.className == "section sortable-list") {
         element.childNodes.forEach((wd) => {
             console.log("Add widget context: " + wd);
@@ -38,10 +40,10 @@ document.addEventListener(
             case "ContextLinkDelete":
                 {
                     LastElement.remove();
-                    delete window.CurrentPage.PageData.sections[
+                    delete Page.PageData.sections[
                         $(".section")[0].id.split("-")[1]
                     ].widgets[LastElement.id.split("-")[1]];
-                    window.CurrentPage.Save();
+                    Page.Save();
                 }
                 break;
             case "ContextLinkOpenTab":

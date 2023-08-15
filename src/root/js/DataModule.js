@@ -2,7 +2,6 @@ import StorageHelper from "./StorageHelper.js";
 
 class Data {
     constructor() {
-        console.log(window.IsFirefox);
         this.Settings = {
             Debug: false,
             Theme: {
@@ -20,7 +19,9 @@ class Data {
             },
         };
         this.HasLoaded = false;
+    }
 
+    CreateDataUpdater(Page) {
         if (window.IsExtension) {
             chrome.storage.onChanged.addListener(async (changes, namespace) => {
                 for (let [key, { oldValue, newValue }] of Object.entries(
@@ -31,8 +32,8 @@ class Data {
                             this.Settings = JSON.parse(newValue);
                         }
                     }
-                    if (window.CurrentPage.PageKey === key) {
-                        window.CurrentPage.PageData = JSON.parse(newValue);
+                    if (Page.CurrentPage === key) {
+                        Page.PageData = JSON.parse(newValue);
                     }
 
                     //console.log(
@@ -44,7 +45,7 @@ class Data {
         }
     }
 
-    async LoadSettings() {
+    async LoadSettings(DOM) {
         var JsonString = StorageHelper.GetLocalData("settings2");
         if (JsonString) {
             this.Settings = JSON.parse(JsonString);
@@ -58,7 +59,9 @@ class Data {
                 } catch {}
             }
 
-            if (!JsonString) {
+            if (JsonString) {
+                window.localStorage.setItem("settings", JsonString);
+            } else {
                 this.Settings.Theme.Mode = window?.matchMedia?.(
                     "(prefers-color-scheme:dark)"
                 )?.matches
@@ -78,10 +81,9 @@ class Data {
                 document.body.classList.remove("theme-dark");
             }
         }
-
-        window.DOM.LoadBackground();
+        DOM.LoadBackground();
         if (this.Settings.Debug) {
-            window.DOM.ToggleDebugOptions();
+            DOM.ToggleDebugOptions();
         }
     }
 

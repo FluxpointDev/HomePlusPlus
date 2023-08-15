@@ -11,18 +11,21 @@ import StorageHelper from "./StorageHelper.js";
 import Http from "./HttpModule.js";
 import Data from "./DataModule.js"; // Requires StorageHelper
 import DOM from "./DomModule.js"; // Requires Utils and Data
+import Page from "./PageModule.js"; // Requires StorageHelper, Data, Utils and DOM
+
+Data.LoadSettings(DOM);
+Page.LoadInitialData();
+Data.CreateDataUpdater(Page);
 
 // Extra modules
 import "./colorpicker-min.js";
 import "./order.js";
-import "./page_data.js"; // Requires StorageHelper, Utils and DOM
 import("./test.js"); // Requires DOM and Data
 import("./micromodal.js");
 import "./setup.js";
 import("./settings.js"); // Requires Data and Http
 
 // Load settings data
-Data.LoadSettings();
 
 var OptionalModules = ["./json_editor-min.js"];
 
@@ -206,13 +209,12 @@ async function ModalSuccesLinkCreate(data) {
         };
     }
 
-    Object.values(window.CurrentPage.PageData.sections)[0].widgets[Data.id] =
-        Data;
+    Object.values(Page.PageData.sections)[0].widgets[Data.id] = Data;
 
     var sortableList = document.querySelector(".sortable-list");
 
     sortableList.append(DOM.CreateWidget(Data));
-    window.CurrentPage.Save();
+    Page.Save();
 
     //window.GlobalSort.sort(function (item) {});
 }

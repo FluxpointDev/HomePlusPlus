@@ -27,7 +27,7 @@ class DomMdule {
                     LinkObj.setAttribute("draggable", "false");
 
                     Object.classList.add("widget-link");
-                    Object_CreateWidgetLink(data, Inner);
+                    this.Object_CreateWidgetLink(data, Inner);
 
                     LinkObj.append(Inner);
 

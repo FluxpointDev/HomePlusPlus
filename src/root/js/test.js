@@ -1,5 +1,6 @@
 import Data from "./DataModule.js";
 import DOM from "./DomModule.js";
+import Page from "./PageModule.js";
 
 document
     .getElementById("nav-dropdown")
@@ -98,7 +99,7 @@ async function Dropdown_OptionSettings(element) {
                         okTrigger: (data) => JsonSaveSettings(data),
                     }
                 );
-                new JsonEditor("#json-viewer", window.CurrentPage.PageData);
+                new JsonEditor("#json-viewer", Page.PageData);
             }
             break;
         case "dropdown-request-topsite":
