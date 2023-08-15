@@ -89,6 +89,14 @@ header {
     color: rgb(237, 236, 236) !important;
 }
 
+.page-head {
+    position: sticky;
+    top: 0;
+}
+.sticky-head {
+    background-color: #29293a;
+}
+
 #menu {
     position: fixed;
     z-index: 9999; /* Most times is 2000 used as middle */

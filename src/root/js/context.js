@@ -13,7 +13,6 @@ var LastElement;
 PageBody.childNodes.forEach((element) => {
     if (element.className == "section sortable-list") {
         element.childNodes.forEach((wd) => {
-            console.log("Add widget context: " + wd);
             AddContext(wd);
         });
     }

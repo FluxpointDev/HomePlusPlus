@@ -8,6 +8,16 @@ document
 
 let EnableDebugCount = 0;
 
+let NavBar = $(".page-head")[0];
+
+window.addEventListener("scroll", (e) => {
+    if (window.scrollY > 16) {
+        NavBar.classList.add("sticky-head");
+    } else {
+        NavBar.classList.remove("sticky-head");
+    }
+});
+
 async function Dropdown_OptionSettings(element) {
     if (element.tagName !== "p") {
         $("#nav-dropdown")[0].children[1].style.display = "none";
