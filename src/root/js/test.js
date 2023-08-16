@@ -43,6 +43,7 @@ async function Dropdown_OptionSettings(element) {
                     Alwan color picker by Sofian - <a target="_blank" href="https://github.com/SofianChouaib/alwan">Link</a><br />
                     MicroModal by Indrashish - <a target="_blank" href="https://github.com/ghosh/Micromodal">Link</a><br />
                     Toasts by Varun - <a target="_blank" href="https://github.com/apvarun/toastify-js">Link</a><br />
+                    Json Editor by dblate <a target="_blank" href="https://github.com/dblate/jquery.json-editor">Link</a>
                     `
                 );
             }

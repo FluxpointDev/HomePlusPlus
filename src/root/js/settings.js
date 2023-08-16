@@ -102,6 +102,31 @@ async function OpenSettingsPanel() {
     );
 
     $("#input-settings-data-restore-page").change(RestorePageSelected);
+
+    if (Data.Settings.Theme.BackgroundImagePosition) {
+        $("#text-settings-background-position")[0].textContent =
+            Data.Settings.Theme.BackgroundImagePosition + "%";
+
+        $("#slider-settings-background-position")[0].value = String(
+            Data.Settings.Theme.BackgroundImagePosition
+        );
+    }
+
+    $("#slider-settings-background-position")[0].addEventListener(
+        "change",
+        BackgroundPosition
+    );
+}
+
+function BackgroundPosition(event) {
+    $("#text-settings-background-position")[0].textContent =
+        event.target.valueAsNumber + "%";
+    Utils.SetDocumentStyle(
+        "--theme-background-position",
+        event.target.valueAsNumber
+    );
+    Data.Settings.Theme.BackgroundImagePosition = event.target.valueAsNumber;
+    Data.Save();
 }
 
 function BackupSettings() {

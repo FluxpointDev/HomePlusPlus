@@ -1,9 +1,8 @@
 {
     "name": "Home++",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "manifest_version": 3,
     "permissions": ["storage"],
-    "optional_permissions": ["notifications", "topSites"],
     "description": "Lightweight and customizable home page to enhance your browsing experience with your own links, background, theme and settings.",
 
     "author": "builderb@fluxpoint.dev",

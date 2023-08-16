@@ -10,6 +10,7 @@ class Data {
                 BackgroundColor: "#2b2b36",
                 BackgroundImage: "background.webp",
                 BackgroundImagePrimaryColor: "",
+                BackgroundImagePosition: 0,
                 NavbarUseBackgroundColor: false,
                 NavbarColor: "#666E99",
                 Color: "#479cd0",
@@ -81,6 +82,24 @@ class Data {
                     this.Settings.Theme.Color
                 );
             }
+
+            if (this.Settings.Theme.BackgroundColor !== "#2b2b36") {
+                Utils.SetDocumentStyle(
+                    "--theme-background-color",
+                    this.Settings.Theme.BackgroundColor
+                );
+            }
+
+            if (
+                this.Settings.Theme.BackgroundImagePosition &&
+                this.Settings.Theme.BackgroundImagePosition !== 0
+            ) {
+                Utils.SetDocumentStyle(
+                    "--theme-background-position",
+                    this.Settings.Theme.BackgroundImagePosition
+                );
+            }
+
             if (this.Settings.Theme.Mode === "light") {
                 document.body.classList.add("theme-light");
                 document.body.classList.remove("theme-dark");
