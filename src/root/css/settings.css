@@ -19,3 +19,7 @@
     background: var(--panel-background-color);
     height: calc(100% - 76px);
 }
+
+.input-hidden {
+    display: none !important;
+}

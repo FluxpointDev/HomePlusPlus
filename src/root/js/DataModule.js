@@ -1,4 +1,5 @@
 import StorageHelper from "./StorageHelper.js";
+import Utils from "./UtilsModule.js";
 
 class Data {
     constructor() {
@@ -46,7 +47,8 @@ class Data {
     }
 
     async LoadSettings(DOM) {
-        var JsonString = StorageHelper.GetLocalData("settings2");
+        var JsonString = StorageHelper.GetLocalData("settings");
+
         if (JsonString) {
             this.Settings = JSON.parse(JsonString);
         } else {
@@ -74,7 +76,10 @@ class Data {
 
         if (JsonString) {
             if (this.Settings.Theme.Color !== "#479cd0") {
-                SetDocumentStyle("--theme-color", this.Settings.Theme.Color);
+                Utils.SetDocumentStyle(
+                    "--theme-color",
+                    this.Settings.Theme.Color
+                );
             }
             if (this.Settings.Theme.Mode === "light") {
                 document.body.classList.add("theme-light");
@@ -88,7 +93,9 @@ class Data {
     }
 
     Save() {
-        StorageHelper.SaveData("settings", this.Settings);
+        if (this.HasLoaded) {
+            StorageHelper.SaveData("settings", this.Settings);
+        }
     }
 }
 

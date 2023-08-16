@@ -16,6 +16,16 @@ class UtilsModule {
         return r + "," + g + "," + b;
     }
 
+    SaveToFile(data, file) {
+        var vLink = document.createElement("a"),
+            vBlob = new Blob([data], { type: "octet/stream" }),
+            vName = file,
+            vUrl = window.URL.createObjectURL(vBlob);
+        vLink.setAttribute("href", vUrl);
+        vLink.setAttribute("download", vName);
+        vLink.click();
+    }
+
     SetDocumentStyle(key, style) {
         document.documentElement.style.setProperty(key, style);
     }

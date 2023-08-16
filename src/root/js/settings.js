@@ -1,5 +1,8 @@
 import Data from "./DataModule.js";
 import Http from "./HttpModule.js";
+import Page from "./PageModule.js";
+import Utils from "./UtilsModule.js";
+import DOM from "./DomModule.js";
 
 window.Settings = {
     OpenSettingsPanel: () => OpenSettingsPanel(),
@@ -34,7 +37,7 @@ async function OpenSettingsPanel() {
     );
 
     PickerThemeColor.on("change", function (colorObject, source) {
-        SetDocumentStyle("--theme-color", colorObject.hex);
+        Utils.SetDocumentStyle("--theme-color", colorObject.hex);
         Data.Settings.Theme.Color = colorObject.hex;
         Data.Save();
     });
@@ -47,7 +50,7 @@ async function OpenSettingsPanel() {
     );
 
     PickerBackgroundColor.on("change", function (colorObject, source) {
-        SetDocumentStyle("--theme-background-color", colorObject.hex);
+        Utils.SetDocumentStyle("--theme-background-color", colorObject.hex);
         Data.Settings.Theme.BackgroundColor = colorObject.hex;
         Data.Save();
     });
@@ -75,6 +78,80 @@ async function OpenSettingsPanel() {
         "click",
         OpenResetDataModal
     );
+
+    $("#btn-settings-data-backup-settings")[0].addEventListener(
+        "click",
+        BackupSettings
+    );
+
+    $("#btn-settings-data-restore-settings")[0].addEventListener(
+        "click",
+        RestoreSettings
+    );
+
+    $("#input-settings-data-restore-settings").change(RestoreSettingsSelected);
+
+    $("#btn-settings-data-backup-page")[0].addEventListener(
+        "click",
+        BackupPage
+    );
+
+    $("#btn-settings-data-restore-page")[0].addEventListener(
+        "click",
+        RestorePage
+    );
+
+    $("#input-settings-data-restore-page").change(RestorePageSelected);
+}
+
+function BackupSettings() {
+    var myString = JSON.stringify(Data.Settings);
+
+    Utils.SaveToFile(myString, "hpp_settings.json");
+}
+
+function RestoreSettings() {
+    $("#input-settings-data-restore-settings")[0].click();
+}
+
+function RestoreSettingsSelected(event) {
+    var reader = new FileReader();
+    reader.onload = (event) => {
+        var obj = JSON.parse(event.target.result);
+        if (obj.Theme === "undefined") {
+            console.log("Failed to validate settings json.");
+        } else {
+            Data.Settings = obj;
+            Data.Save();
+            location.reload();
+        }
+    };
+    reader.readAsText(event.target.files[0]);
+}
+
+function BackupPage() {
+    var myString = JSON.stringify(Page.PageData);
+
+    Utils.SaveToFile(myString, "hpp_page_" + Page.PageData.name + ".json");
+}
+
+function RestorePage() {
+    $("#input-settings-data-restore-page")[0].click();
+}
+
+function RestorePageSelected(event) {
+    var reader = new FileReader();
+    reader.onload = (event) => {
+        var obj = JSON.parse(event.target.result);
+        if (obj.Theme === "undefined") {
+            console.log("Failed to validate settings json.");
+        } else {
+            Page.PageData = obj;
+            Page.Save();
+            location.reload();
+        }
+    };
+    reader.readAsText(event.target.files[0]);
 }
 
 function CloseSettingsPanel() {
@@ -198,10 +275,6 @@ function LoadThemePicker(setting, button, menu, defaults) {
         },
         swatches: defaults,
     });
-}
-
-function SetDocumentStyle(key, style) {
-    document.documentElement.style.setProperty(key, style);
 }
 
 function OpenResetDataModal() {

@@ -87,12 +87,12 @@ function LoadBackground() {
             Data.Settings.Theme.BackgroundImage === "background.jpg" ||
             Data.Settings.Theme.BackgroundImage === "background.webp"
         ) {
-            SetDocumentStyle(
+            Utils.SetDocumentStyle(
                 "background-image",
                 "url('parts/background.webp'), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))"
             );
         } else {
-            SetDocumentStyle(
+            Utils.SetDocumentStyle(
                 "background-image",
                 "url('" +
                     Data.Settings.Theme.BackgroundImage +
@@ -103,8 +103,4 @@ function LoadBackground() {
         document.documentElement.classList.remove("html-background");
         document.documentElement.style.removeProperty("background-image");
     }
-}
-
-function SetDocumentStyle(key, style) {
-    document.documentElement.style.setProperty(key, style);
 }

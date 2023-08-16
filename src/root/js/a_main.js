@@ -9,7 +9,7 @@ import "./toast-min.js";
 import Utils from "./UtilsModule.js";
 import StorageHelper from "./StorageHelper.js";
 import Http from "./HttpModule.js";
-import Data from "./DataModule.js"; // Requires StorageHelper
+import Data from "./DataModule.js"; // Requires StorageHelper and Utils
 import DOM from "./DomModule.js"; // Requires Utils and Data
 import Page from "./PageModule.js"; // Requires StorageHelper, Data, Utils and DOM
 
@@ -23,7 +23,7 @@ import "./order.js";
 import("./test.js"); // Requires DOM and Data
 import("./micromodal.js");
 import "./setup.js";
-import("./settings.js"); // Requires Data and Http
+import("./settings.js"); // Requires Data, Http, Page, Utils and DOM
 
 // Load settings data
 
