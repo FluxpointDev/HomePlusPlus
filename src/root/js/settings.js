@@ -168,7 +168,7 @@ function RestorePageSelected(event) {
     var reader = new FileReader();
     reader.onload = (event) => {
         var obj = JSON.parse(event.target.result);
-        if (obj.Theme === "undefined") {
+        if (obj.id === "undefined") {
             console.log("Failed to validate settings json.");
         } else {
             Page.PageData = obj;
