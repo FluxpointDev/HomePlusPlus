@@ -314,7 +314,7 @@ function OpenResetDataModal() {
 
 async function ResetDataConfirm(data) {
     if (window.IsExtension) {
-        await chrome.storage.location.clear();
+        await chrome.storage.local.clear();
     }
     window.localStorage.clear();
 

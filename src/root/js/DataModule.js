@@ -29,14 +29,16 @@ class Data {
                 for (let [key, { oldValue, newValue }] of Object.entries(
                     changes
                 )) {
-                    if (key === "settings") {
-                        if (this.HasLoaded) {
-                            this.Settings = JSON.parse(newValue);
+                    try {
+                        if (key === "settings") {
+                            if (this.HasLoaded) {
+                                this.Settings = JSON.parse(newValue);
+                            }
                         }
-                    }
-                    if (Page.CurrentPage === key) {
-                        Page.PageData = JSON.parse(newValue);
-                    }
+                        if (Page.CurrentPage === key) {
+                            Page.PageData = JSON.parse(newValue);
+                        }
+                    } catch {}
 
                     //console.log(
                     //    `Storage key "${key}" in namespace "${namespace}" changed.`,
