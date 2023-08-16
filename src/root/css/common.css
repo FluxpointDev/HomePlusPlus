@@ -48,6 +48,7 @@ header {
 }
 .page-head {
     background-color: rgba(51, 53, 71, 0.7);
+    z-index: 1;
 }
 .page-nav {
     display: flex;
