@@ -10,6 +10,10 @@ let EnableDebugCount = 0;
 
 let NavBar = $(".page-head")[0];
 
+if (window.scrollY > 16) {
+    NavBar.classList.add("sticky-head");
+}
+
 window.addEventListener("scroll", (e) => {
     if (window.scrollY > 16) {
         NavBar.classList.add("sticky-head");
