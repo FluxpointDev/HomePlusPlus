@@ -84,7 +84,7 @@ async function Dropdown_OptionSettings(element) {
                 if (EnableDebugCount >= 3) {
                     Data.Settings.Debug = !Data.Settings.Debug;
                     Data.Save();
-                    window.DOM.ToggleDebugOptions();
+                    DOM.ToggleDebugOptions();
                 }
             }
             break;
@@ -124,13 +124,6 @@ async function Dropdown_OptionSettings(element) {
                     }
                 );
                 new JsonEditor("#json-viewer", Page.PageData);
-            }
-            break;
-        case "dropdown-request-topsite":
-            {
-                chrome.permissions.request({
-                    permissions: ["topSites"],
-                });
             }
             break;
     }
