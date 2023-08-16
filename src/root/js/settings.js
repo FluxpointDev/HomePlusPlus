@@ -143,7 +143,7 @@ function RestoreSettingsSelected(event) {
     var reader = new FileReader();
     reader.onload = (event) => {
         var obj = JSON.parse(event.target.result);
-        if (obj.Theme === "undefined") {
+        if (obj.Theme === "undefined" || !obj.Theme) {
             console.log("Failed to validate settings json.");
         } else {
             Data.Settings = obj;
@@ -168,8 +168,8 @@ function RestorePageSelected(event) {
     var reader = new FileReader();
     reader.onload = (event) => {
         var obj = JSON.parse(event.target.result);
-        if (obj.id === "undefined") {
-            console.log("Failed to validate settings json.");
+        if (obj.id === "undefined" || !obj.id) {
+            console.log("Failed to validate page json.");
         } else {
             Page.PageData = obj;
             Page.Save();
