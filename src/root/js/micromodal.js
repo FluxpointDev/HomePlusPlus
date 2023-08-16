@@ -36,6 +36,7 @@
                 debugMode: c,
                 message: m,
                 title: tm,
+                fullWidth: fm,
             }) {
                 (this.modal = document.getElementById(e)),
                     (t = t || []),
@@ -49,6 +50,7 @@
                     (d = d || !1),
                     (r = r || !1),
                     (c = c || !1),
+                    (fm = fm || false),
                     (this.config = {
                         debugMode: c,
                         disableScroll: a,
@@ -62,6 +64,7 @@
                         disableFocus: l,
                         message: m,
                         title: tm,
+                        fullWidth: fm,
                     }),
                     t.length > 0 && this.registerTriggers(...t),
                     (this.onClick = this.onClick.bind(this)),
@@ -123,6 +126,12 @@
                 if (FirstFocusElement) {
                     FirstFocusElement.focus();
                 }
+                if (this.config.fullWidth) {
+                    this.modal.classList.add("modal-fullwidth");
+                } else {
+                    this.modal.classList.remove("modal-fullwidth");
+                }
+
                 this.config.onShow(this.modal, this.activeElement);
             }
             closeModal() {

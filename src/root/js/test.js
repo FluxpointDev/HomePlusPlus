@@ -92,9 +92,16 @@ async function Dropdown_OptionSettings(element) {
             {
                 MicroModal.showOption(
                     "Settings Json",
-                    "<div id='json-viewer'></div>",
+                    "<p>DO NOT EDIT id values or add unknown values as this can cause issues.</p><div id='json-viewer'></div></div><br /><p>Do you want to save these settings?</p>",
                     {
-                        okTrigger: (data) => JsonSaveSettings(data),
+                        okTrigger: (data) => {
+                            Data.Settings = JSON.parse(
+                                $("#json-viewer")[0].textContent
+                            );
+                            Data.Save();
+                            location.reload();
+                        },
+                        fullWidth: true,
                     }
                 );
                 new JsonEditor("#json-viewer", Data.Settings);
@@ -104,9 +111,16 @@ async function Dropdown_OptionSettings(element) {
             {
                 MicroModal.showOption(
                     "Page Json",
-                    "<div id='json-viewer'></div>",
+                    "<p>DO NOT EDIT id values or add unknown values as this can cause issues.</p><div id='json-viewer'></div><br /><p>Do you want to save these settings?</p>",
                     {
-                        okTrigger: (data) => JsonSaveSettings(data),
+                        okTrigger: (data) => {
+                            Page.PageData = JSON.parse(
+                                $("#json-viewer")[0].textContent
+                            );
+                            Page.Save();
+                            location.reload();
+                        },
+                        fullWidth: true,
                     }
                 );
                 new JsonEditor("#json-viewer", Page.PageData);
@@ -124,8 +138,6 @@ async function Dropdown_OptionSettings(element) {
         $("#nav-dropdown")[0].children[1].style.display = "";
     }, 1);
 }
-
-function JsonSaveSettings() {}
 
 function ModalClose(data) {
     console.log("Modal close");
