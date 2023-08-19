@@ -2,25 +2,11 @@ import Data from "./DataModule.js";
 import DOM from "./DomModule.js";
 import Page from "./PageModule.js";
 
-document
-    .getElementById("nav-dropdown")
-    .addEventListener("click", (elm) => Dropdown_OptionSettings(elm.target));
+$("#nav-dropdown")[0].addEventListener("click", (elm) =>
+    Dropdown_OptionSettings(elm.target)
+);
 
 let EnableDebugCount = 0;
-
-let NavBar = $(".page-head")[0];
-
-if (window.scrollY > 16) {
-    NavBar.classList.add("sticky-head");
-}
-
-window.addEventListener("scroll", (e) => {
-    if (window.scrollY > 16) {
-        NavBar.classList.add("sticky-head");
-    } else {
-        NavBar.classList.remove("sticky-head");
-    }
-});
 
 async function Dropdown_OptionSettings(element) {
     if (element.tagName !== "p") {

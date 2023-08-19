@@ -154,7 +154,7 @@ function ModalSuccessLinkEnter(event) {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
-        document.getElementById("btn-modal-create-link-success").click();
+        $("#btn-modal-create-link-success")[0].click();
     }
 }
 
@@ -240,5 +240,5 @@ function getClockTime() {
         second = "0" + second;
     }
     var timeString = hour + ":" + minute + " " + meridiem;
-    document.getElementById("clock").textContent = timeString;
+    $("#clock")[0].textContent = timeString;
 }

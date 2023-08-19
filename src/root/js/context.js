@@ -4,7 +4,7 @@ window.Context = {
     AddContextMenu: (element) => AddContext(element),
 };
 
-var i = document.getElementById("menu").style;
+var i = $("#menu")[0].style;
 
 var PageBody = document.getElementsByClassName("page-body")[0];
 
