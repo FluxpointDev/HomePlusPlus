@@ -1,6 +1,6 @@
 {
     "name": "Home++",
-    "version": "1.5.1",
+    "version": "1.6.0",
     "manifest_version": 3,
     "permissions": ["storage"],
     "description": "Lightweight and customizable home page to enhance your browsing experience with your own links, background, theme and settings.",
