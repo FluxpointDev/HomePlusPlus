@@ -30,14 +30,14 @@ async function Dropdown_OptionSettings(element) {
                 MicroModal.showError(
                     "About Home++",
                     `This extension was made by Builderb (Fluxpoint Development)<br />
-                    Check out the source code on our <a target="_blank" href="https://github.com/FluxpointDev/HomePlusPlus">GitHub</a><br />
-                    Join our Discord server: <a target="_blank" href="https://discord.gg/fluxpoint">https://discord.gg/fluxpoint</a><br /><br />
+                    Check out the source code on our <a rel="noreferrer" target="_blank" href="https://github.com/FluxpointDev/HomePlusPlus">GitHub</a><br />
+                    Join our Discord server: <a rel="noreferrer" target="_blank" href="https://discord.gg/fluxpoint">https://discord.gg/fluxpoint</a><br /><br />
                     3rd party modules used<br />
-                    JQuery by John Resig <a target="_blank" href="https://github.com/jquery/jquery">Link</a><br />
-                    Alwan color picker by Sofian - <a target="_blank" href="https://github.com/SofianChouaib/alwan">Link</a><br />
-                    MicroModal by Indrashish - <a target="_blank" href="https://github.com/ghosh/Micromodal">Link</a><br />
-                    Toasts by Varun - <a target="_blank" href="https://github.com/apvarun/toastify-js">Link</a><br />
-                    Json Editor by dblate <a target="_blank" href="https://github.com/dblate/jquery.json-editor">Link</a>
+                    JQuery by John Resig <a rel="noreferrer" target="_blank" href="https://github.com/jquery/jquery">Link</a><br />
+                    Alwan color picker by Sofian - <a rel="noreferrer" target="_blank" href="https://github.com/SofianChouaib/alwan">Link</a><br />
+                    MicroModal by Indrashish - <a rel="noreferrer" target="_blank" href="https://github.com/ghosh/Micromodal">Link</a><br />
+                    Toasts by Varun - <a rel="noreferrer" target="_blank" href="https://github.com/apvarun/toastify-js">Link</a><br />
+                    Json Editor by dblate <a rel="noreferrer" target="_blank" href="https://github.com/dblate/jquery.json-editor">Link</a>
                     `
                 );
             }
