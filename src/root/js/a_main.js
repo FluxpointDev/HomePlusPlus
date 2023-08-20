@@ -41,6 +41,12 @@ window.onload = function () {
             "v" + chrome.runtime.getManifest().version;
     }
 
+    DOMPurify.addHook("afterSanitizeAttributes", (node) => {
+        if (node.tagName === "A" && node.getAttribute("target") === "_blank") {
+            node.setAttribute("rel", "noreferrer");
+        }
+    });
+
     getClockTime();
     setInterval(getClockTime, 15000);
     Modals.LoadEvents();

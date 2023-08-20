@@ -89,7 +89,9 @@
                         this.config.title;
                     if (this.config.message) {
                         ModalObject.children[1].children[0].innerHTML =
-                            DOMPurify.sanitize(this.config.message, {});
+                            DOMPurify.sanitize(this.config.message, {
+                                ADD_ATTR: ["target"],
+                            });
                     }
                 }
 
