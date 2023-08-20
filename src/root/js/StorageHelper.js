@@ -24,7 +24,14 @@ class StorageHelper {
     SaveData(key, value) {
         var StringData = JSON.stringify(value);
         if (window.IsExtension) {
-            chrome.storage.local.set({ [key]: StringData });
+            try {
+                chrome.storage.local.set({ [key]: StringData });
+            } catch {
+                MicroModal.showError(
+                    "Data Limit",
+                    "This extension can't save any more data due to local storage limits, please contact the developer."
+                );
+            }
         }
         window.localStorage.setItem(key, StringData);
         try {
