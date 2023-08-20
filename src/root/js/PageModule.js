@@ -16,10 +16,10 @@ class PageModule {
     async LoadInitialData() {
         await this.LoadPage();
 
-        $("#nav-page-home")[0].addEventListener(
-            "click",
-            this.SwitchPage("page-home")
-        );
+        //$("#nav-page-home")[0].addEventListener(
+        //    "click",
+        //    this.SwitchPage("page-home")
+        //);
         if (this.PageData.name !== "Home") {
             $("#nav-page-home")[0].children[0].textContent = this.PageData.name;
         }
@@ -31,7 +31,8 @@ class PageModule {
             if (key.startsWith("page-") && key !== "page-home") {
                 var node = document.createElement("li");
                 node.id = "nav-" + key;
-                node.addEventListener("click", () => this.SwitchPage(key));
+                node.addEventListener("click", this.SwitchPage(key));
+
                 var pagelink = document.createElement("a");
 
                 var PageSettings = JSON.parse(value);
@@ -94,14 +95,26 @@ class PageModule {
         $(".section")[0].id =
             "section-" + Object.values(this.PageData.sections)[0].id;
 
-        for (let [key, value] of Object.entries(
-            Object.values(this.PageData.sections)[0].widgets
-        )) {
-            sortableList.append(DOM.CreateWidget(value));
-        }
+        Object.entries(Object.values(this.PageData.sections)[0].widgets)
+            .sort((a, b) => a[1].position - b[1].position)
+            .forEach((element) => {
+                sortableList.append(DOM.CreateWidget(element[1]));
+            });
+        window.GlobalSort.sort(this.SortableSaveOrder);
 
         import("./context.js");
-        //this.GlobalSort.sort(function (item) {});
+    }
+
+    SortableSaveOrder(PageModule, element) {
+        var IndexCount = 0;
+        element.parentElement.childNodes.forEach((elm) => {
+            PageModule.PageData.sections[
+                element.parentElement.id.split("-")[1]
+            ].widgets[elm.id.split("-")[1]].position = IndexCount;
+            IndexCount += 1;
+        });
+
+        PageModule.Save();
     }
 
     Save() {

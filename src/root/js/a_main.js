@@ -14,24 +14,30 @@ import DOM from "./DomModule.js"; // Requires Utils and Data
 import Page from "./PageModule.js"; // Requires StorageHelper, Data, Utils and DOM
 import Modals from "./ModalsModule.js";
 
-Data.LoadSettings(DOM);
 Page.LoadInitialData();
 Data.CreateDataUpdater(Page);
+Data.LoadSettings(DOM);
 
 // Extra modules
 import "./colorpicker-min.js";
-import "./order.js";
 import("./test.js"); // Requires DOM and Data
 import("./micromodal.js");
 import "./setup.js";
+import "./order.js";
 import("./settings.js"); // Requires Data, Http, Page, Utils and DOM
 
 // Load settings data
 
 var OptionalModules = ["./json_editor-min.js"];
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", InitilizeHome);
+
+function InitilizeHome() {
     console.log("Initialize home");
+
+    OptionalModules.forEach((element) => {
+        import(element);
+    });
 
     // Setup page here
     // DOM.LoadHtmlPart("#PartSetup", "parts/setup.html");
@@ -49,16 +55,14 @@ window.onload = function () {
 
     getClockTime();
     setInterval(getClockTime, 15000);
-    Modals.LoadEvents();
 
-    OptionalModules.forEach((element) => {
-        import(element);
-    });
+    Modals.LoadEvents();
+    console.clear();
 
     if (window.IsExtension && window.IsChrome) {
         // Check for update here
     }
-};
+}
 
 function ToastService() {
     return new Toasts({

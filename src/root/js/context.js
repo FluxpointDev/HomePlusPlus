@@ -27,19 +27,12 @@ document.addEventListener(
         setTimeout(function () {
             i.visibility = "hidden";
         }, 60);
-
-        console.log("Last: ");
-        console.log(LastElement);
-
         if (
             LastElement.tagName !== "DIV" ||
             !LastElement.id.startsWith("widget-")
         ) {
             return;
         }
-
-        console.log("Target: ");
-        console.log(e.target);
 
         try {
             if (e.target.tagName === "DIV")
@@ -49,7 +42,6 @@ document.addEventListener(
         switch (e.target.id) {
             case "ContextLinkDelete":
                 {
-                    console.log("DELETE LINK");
                     LastElement.remove();
                     delete Page.PageData.sections[
                         $(".section")[0].id.split("-")[1]

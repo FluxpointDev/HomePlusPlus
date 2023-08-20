@@ -34,6 +34,7 @@ class DomMdule {
         switch (data.type) {
             case "link":
                 {
+                    Object.setAttribute("draggable", "true");
                     var LinkObj = document.createElement("a");
                     LinkObj.href = data.link;
 

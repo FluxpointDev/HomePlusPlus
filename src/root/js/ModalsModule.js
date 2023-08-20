@@ -14,7 +14,6 @@ class ModalsModule {
     }
 
     async LoadModals() {
-        console.log("Load DOM modules");
         await DOM.LoadHtmlPart("#PartModals", "parts/modals.html");
 
         MicroModal.init({
@@ -135,10 +134,11 @@ class ModalsModule {
 
         var sortableList = document.querySelector(".sortable-list");
 
-        sortableList.append(DOM.CreateWidget(Data));
-        Page.Save();
+        var Element = DOM.CreateWidget(Data);
+        sortableList.append(Element);
 
-        //window.GlobalSort.sort(function (item) {});
+        window.GlobalSort.sort(Page.SortableSaveOrder);
+        Page.Save();
     }
 
     OnPasteLink(event) {

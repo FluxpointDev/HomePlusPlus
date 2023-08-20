@@ -1,7 +1,9 @@
+import Page from "./PageModule.js";
+
 const list = document.querySelector(".sortable-list");
 var listItems = null;
 
-// let dragIndex, dragSource
+let dragIndex, dragSource;
 
 const getMouseOffset = (evt) => {
     const targetRect = evt.target.getBoundingClientRect();
@@ -36,7 +38,11 @@ const appendPlaceholder = (evt, idx) => {
     return;
 };
 
-function sortAdd(item) {}
+function sortAdd(item) {
+    if (listItems) {
+        listItems.add(item);
+    }
+}
 
 function sortable(onUpdate) {
     var dragEl;
@@ -62,9 +68,13 @@ function sortable(onUpdate) {
             const middleY = getElementVerticalCenter(evt.target);
 
             if (offset.y > middleY) {
-                rootEl.insertBefore(dragEl, target.nextSibling);
+                try {
+                    rootEl.insertBefore(dragEl, target.nextSibling);
+                } catch {}
             } else {
-                rootEl.insertBefore(dragEl, target);
+                try {
+                    rootEl.insertBefore(dragEl, target);
+                } catch {}
             }
         }
     }
@@ -73,14 +83,12 @@ function sortable(onUpdate) {
     function _onDragEnd(evt) {
         evt.preventDefault();
 
-        console.log("Drag ended");
-
         dragEl.classList.remove("ghost");
         rootEl.removeEventListener("dragover", _onDragOver, false);
         rootEl.removeEventListener("dragend", _onDragEnd, false);
 
         // Notification about the end of sorting
-        onUpdate(dragEl);
+        onUpdate(Page, dragEl);
     }
 
     // Sorting starts
@@ -89,7 +97,7 @@ function sortable(onUpdate) {
         function (evt) {
             dragEl = evt.target; // Remembering an element that will be moved
 
-            console.log(dragEl);
+            // console.log(dragEl);
             // Limiting the movement type
             evt.dataTransfer.effectAllowed = "move";
             evt.dataTransfer.setData("Text", dragEl.textContent);
