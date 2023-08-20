@@ -12,6 +12,7 @@ import Http from "./HttpModule.js";
 import Data from "./DataModule.js"; // Requires StorageHelper and Utils
 import DOM from "./DomModule.js"; // Requires Utils and Data
 import Page from "./PageModule.js"; // Requires StorageHelper, Data, Utils and DOM
+import Modals from "./ModalsModule.js";
 
 Data.LoadSettings(DOM);
 Page.LoadInitialData();
@@ -29,14 +30,11 @@ import("./settings.js"); // Requires Data, Http, Page, Utils and DOM
 
 var OptionalModules = ["./json_editor-min.js"];
 
-async function getFileContentAsText(file) {
-    const response = await fetch(file);
-    const fileContent = await response.text();
-    return fileContent;
-}
-
 window.onload = function () {
     console.log("Initialize home");
+
+    // Setup page here
+    // DOM.LoadHtmlPart("#PartSetup", "parts/setup.html");
 
     if (window.IsExtension) {
         $("#dropdown-version")[0].textContent =
@@ -45,44 +43,16 @@ window.onload = function () {
 
     getClockTime();
     setInterval(getClockTime, 15000);
-    insertContentsFromFiles();
-};
-
-function TestFunctionHere() {
-    console.log("Test function");
-}
-
-//insertContentsFromFiles();
-//window.Setup.LoadSetupWindow();
-async function insertContentsFromFiles() {
-    const tbl = document.querySelectorAll("[data-src]");
-    for (var i = 0; i < tbl.length; i++) {
-        try {
-            tbl[i].outerHTML = await getFileContentAsText(tbl[i].dataset.src);
-        } catch {}
-    }
+    Modals.LoadEvents();
 
     OptionalModules.forEach((element) => {
         import(element);
     });
 
-    document
-        .getElementById("btn-add")
-        .addEventListener("click", OpenCreateModal);
-
-    document
-        .getElementById("btn-modal-addpage")
-        .addEventListener("click", OpenPageModal);
-
-    MicroModal.init({
-        disableScroll: false,
-        awaitCloseAnimation: true,
-    });
-
     if (window.IsExtension && window.IsChrome) {
         // Check for update here
     }
-}
+};
 
 function ToastService() {
     return new Toasts({
@@ -94,7 +64,7 @@ function ToastService() {
     });
 }
 
-function OpenModals() {
+function LoadToastsTest() {
     var Toasts = ToastService();
     Toasts.push({
         title: "My Toast Notification Title",
@@ -108,115 +78,6 @@ function OpenModals() {
         style: "error",
         dismissAfter: "5s",
     });
-}
-
-function OpenCreateModal() {
-    ModalSuccess("");
-    //MicroModal.show("modal-create", {
-    //    okTrigger: (data) => ModalSuccess(data),
-    //});
-}
-
-function OpenPageModal() {
-    var pageCount = 0;
-    for (let [key, value] of StorageHelper.GetAllItems()) {
-        if (key.startsWith("page-")) {
-            pageCount += 1;
-        }
-    }
-
-    // MicroModal.close("modal-create");
-
-    if (pageCount >= 5) {
-        MicroModal.showError("Page Limit", "You can only add up to 5 pages!");
-    } else {
-        MicroModal.show("modal-page-create", {
-            okTrigger: (data) => ModalSuccess(data),
-        });
-    }
-}
-
-function ModalSuccess(data) {
-    MicroModal.show("modal-link-create", {
-        okTrigger: (data) => ModalSuccesLinkCreate(data),
-    });
-    $("#input-modal-create-link")[0].value = "https://";
-    $("#input-modal-create-link")[0].addEventListener(
-        "keypress",
-        ModalSuccessLinkEnter
-    );
-    $("#input-modal-create-link")[0].addEventListener("paste", OnPasteLink);
-}
-
-function ModalSuccessLinkEnter(event) {
-    // If the user presses the "Enter" key on the keyboard
-    if (event.key === "Enter") {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        $("#btn-modal-create-link-success")[0].click();
-    }
-}
-
-function OnPasteLink(event) {
-    var PasteData = event.clipboardData.getData("Text");
-    if (
-        this.value &&
-        this.value.startsWith("https://") &&
-        PasteData.startsWith("https://")
-    ) {
-        this.value = PasteData;
-        event.preventDefault();
-    }
-}
-
-async function ModalSuccesLinkCreate(data) {
-    var Link = data.children[2].value;
-
-    if (typeof Link === "undefined") {
-        return;
-    }
-
-    Link = Link.toLowerCase();
-
-    if (!Link.startsWith("https://")) {
-        Link = "https://" + Link;
-    }
-
-    var Data = null;
-
-    if (Link.includes("://localhost") || Link.includes("://127.0.0.1")) {
-        Data = {
-            id: Utils.GenerateRandomID(),
-            name: "Localhost",
-            link: Link,
-            type: "link",
-            image: "",
-            defaultImage: true,
-            position: 0,
-        };
-    } else {
-        var Json = await Http.GetFaviconBase64(Link);
-
-        Data = {
-            id: Utils.GenerateRandomID(),
-            name: Json.Name,
-            link: Link,
-            type: "link",
-            image: Json.Image,
-            color: Json.Color,
-            position: 0,
-        };
-    }
-
-    Object.values(Page.PageData.sections)[0].widgets[Data.id] = Data;
-
-    var sortableList = document.querySelector(".sortable-list");
-
-    sortableList.append(DOM.CreateWidget(Data));
-    Page.Save();
-
-    //window.GlobalSort.sort(function (item) {});
 }
 
 function getClockTime() {

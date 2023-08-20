@@ -41,7 +41,10 @@ document.addEventListener(
         console.log("Target: ");
         console.log(e.target);
 
-        if (e.target.tagName === "DIV") e.target = e.target.firstElementChild;
+        try {
+            if (e.target.tagName === "DIV")
+                e.target = e.target.firstElementChild;
+        } catch {}
 
         switch (e.target.id) {
             case "ContextLinkDelete":

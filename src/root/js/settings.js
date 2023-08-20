@@ -13,15 +13,8 @@ window.Settings = {
 var PickerThemeColor;
 var PickerBackgroundColor;
 
-async function getFileContentAsText(file) {
-    const response = await fetch(file);
-    const fileContent = await response.text();
-    return fileContent;
-}
-
 async function OpenSettingsPanel() {
-    var SettingsPanel = $("#page-panel-right")[0];
-    SettingsPanel.innerHTML = await getFileContentAsText("parts/settings.html");
+    await DOM.LoadHtmlPart("#page-panel-right", "parts/settings.html", true);
     window.Settings.HasPanelHandle = true;
     UpdateDataSize();
 

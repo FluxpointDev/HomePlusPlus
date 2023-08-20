@@ -2,6 +2,19 @@ import Data from "./DataModule.js";
 import Utils from "./UtilsModule.js";
 
 class DomMdule {
+    constructor() {}
+
+    async LoadHtmlPart(targetElement, file, isInner) {
+        const response = await fetch(file);
+        const fileContent = await response.text();
+
+        if (isInner) {
+            $(targetElement)[0].innerHTML = fileContent;
+        } else {
+            $(targetElement)[0].outerHTML = fileContent;
+        }
+    }
+
     CreateWidget(data) {
         var Object = document.createElement("div");
         Object.id = "widget-" + data.id;
