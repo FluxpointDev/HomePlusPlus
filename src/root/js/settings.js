@@ -3,6 +3,7 @@ import Http from "./HttpModule.js";
 import Page from "./PageModule.js";
 import Utils from "./UtilsModule.js";
 import DOM from "./DomModule.js";
+import Modals from "./ModalsModule.js";
 
 window.Settings = {
     OpenSettingsPanel: () => OpenSettingsPanel(),
@@ -204,6 +205,10 @@ async function UpdateBackgroundImage() {
             $("#input-settings-theme-background-image-file")[0].files[0].size >
             1000000
         ) {
+            if (!Modals.IsLoaded) {
+                await Modals.LoadModals();
+            }
+
             MicroModal.showError(
                 "Upload Limit",
                 "You can only upload an image less than 1 MB."
@@ -224,6 +229,10 @@ async function UpdateBackgroundImage() {
         var WebURL = $("#input-settings-theme-background-image")[0].value;
 
         if (WebURL !== "undefined") {
+            if (!Modals.IsLoaded) {
+                await Modals.LoadModals();
+            }
+
             MicroModal.showError(
                 "URL Required",
                 "You need to enter an image url to show as background."
@@ -295,7 +304,11 @@ function LoadThemePicker(setting, button, menu, defaults) {
     });
 }
 
-function OpenResetDataModal() {
+async function OpenResetDataModal() {
+    if (!Modals.IsLoaded) {
+        await Modals.LoadModals();
+    }
+
     MicroModal.showOption(
         "Reset Data",
         "Are you sure you want to reset all data?",
