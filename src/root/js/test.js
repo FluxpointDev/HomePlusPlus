@@ -1,6 +1,7 @@
 import Data from "./DataModule.js";
 import DOM from "./DomModule.js";
 import Page from "./PageModule.js";
+import Modals from "./ModalsModule.js";
 
 $("#nav-dropdown")[0].addEventListener("click", (elm) =>
     Dropdown_OptionSettings(elm.target)
@@ -23,6 +24,9 @@ async function Dropdown_OptionSettings(element) {
             break;
         case "dropdown-about":
             {
+                if (!Modals.IsLoaded) {
+                    await Modals.LoadModals();
+                }
                 MicroModal.showError(
                     "About Home++",
                     `This extension was made by Builderb (Fluxpoint Development)<br />
@@ -40,6 +44,10 @@ async function Dropdown_OptionSettings(element) {
             break;
         case "dropdown-debug":
             {
+                if (!Modals.IsLoaded) {
+                    await Modals.LoadModals();
+                }
+
                 if (!window.IsExtension) {
                     MicroModal.showError(
                         "Addon Error",
@@ -81,6 +89,9 @@ async function Dropdown_OptionSettings(element) {
             break;
         case "dropdown-debug-settings":
             {
+                if (!Modals.IsLoaded) {
+                    await Modals.LoadModals();
+                }
                 MicroModal.showOption(
                     "Settings Json",
                     "<p>DO NOT EDIT id values or add unknown values as this can cause issues.</p><div id='json-viewer'></div></div><br /><p>Do you want to save these settings?</p>",
@@ -100,6 +111,9 @@ async function Dropdown_OptionSettings(element) {
             break;
         case "dropdown-debug-page":
             {
+                if (!Modals.IsLoaded) {
+                    await Modals.LoadModals();
+                }
                 MicroModal.showOption(
                     "Page Json",
                     "<p>DO NOT EDIT id values or add unknown values as this can cause issues.</p><div id='json-viewer'></div><br /><p>Do you want to save these settings?</p>",
