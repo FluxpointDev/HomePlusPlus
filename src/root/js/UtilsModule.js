@@ -1,6 +1,7 @@
 class UtilsModule {
     constructor() {
-        window.IsExtension = typeof chrome !== "undefined";
+        window.IsExtension =
+            typeof chrome !== "undefined" && typeof chrome.app === "undefined";
         window.IsFirefox = navigator.userAgent.indexOf("Firefox") > 0;
         window.IsChrome = navigator.userAgent.indexOf("Chrome") > 0;
     }
