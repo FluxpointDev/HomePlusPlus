@@ -102,38 +102,52 @@ header {
 
 #menu {
     position: fixed;
-    z-index: 9999; /* Most times is 2000 used as middle */
+    z-index: 100;
     visibility: hidden;
     opacity: 0;
 
     padding: 0px;
-    font-size: 9.5pt;
-    font-family: Tahoma;
+
     background-color: var(--context-background-color) !important;
-    color: var(--context-text-color) !important;
     border: 1px solid var(--context-item-background-hover-color);
 
     -webkit-transition: opacity 0.1s ease-in-out;
     -moz-transition: opacity 0.1s ease-in-out;
     transition: opacity 0.1s ease-in-out;
 
-    width: 170px;
+    width: 180px;
     padding: 1px;
     padding-top: 4px;
     border-radius: 4px;
 }
+#ContextLinkDelete p {
+    color: #e05153 !important;
+}
 #menu div {
     display: block;
     color: var(--context-text-color) !important;
+    font-size: 9.3pt;
     text-decoration: none;
     padding: 8px 10px 8px 10px;
     position: relative;
     cursor: pointer;
     margin-bottom: 3px;
+    font-family: sans-serif;
 }
-#menu > div:hover {
-    background-color: var(--context-item-background-hover-color) !important;
+#menu div:hover {
+    background-color: var(--context-item-background-hover-color);
+}
+#menu div:hover p {
     color: var(--context-text-color) !important;
+}
+#ContextLinkDelete:hover {
+    background-color: #a43334 !important;
+}
+#menu svg {
+    width: 12.5pt;
+    height: 12.5pt;
+    margin-bottom: -4px;
+    margin-right: 4px;
 }
 
 #menu hr {

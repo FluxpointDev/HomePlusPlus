@@ -27,6 +27,7 @@ document.addEventListener(
         setTimeout(function () {
             i.visibility = "hidden";
         }, 60);
+
         if (
             LastElement.tagName !== "DIV" ||
             !LastElement.id.startsWith("widget-")
@@ -35,8 +36,7 @@ document.addEventListener(
         }
 
         try {
-            if (e.target.tagName === "DIV")
-                e.target = e.target.firstElementChild;
+            if (e.target.tagName === "P") e.target = e.target.parentElement;
         } catch {}
 
         switch (e.target.id) {
