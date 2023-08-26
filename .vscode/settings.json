@@ -1,3 +1,21 @@
 {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "minify.minifyExistingOnSave": true,
+    "minify.css": {
+        "advanced": true,
+        "aggressiveMerging": true,
+        "compatibility": "*",
+        "inliner": {},
+        "keepBreaks": false,
+        "keepSpecialComments": "*",
+        "mediaMerging": true,
+        "processImport": true,
+        "processImportFrom": ["all"],
+        "rebase": true,
+        "restructuring": true,
+        "root": "${workspaceRoot}/src/root/css",
+        "roundingPrecision": 2,
+        "semanticMerging": false,
+        "shorthandCompacting": true
+    }
 }

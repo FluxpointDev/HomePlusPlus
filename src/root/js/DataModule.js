@@ -105,6 +105,9 @@ class Data {
             if (this.Settings.Theme.Mode === "light") {
                 document.body.classList.add("theme-light");
                 document.body.classList.remove("theme-dark");
+                document.head.querySelector(
+                    'meta[name="theme-color"]'
+                ).content = "#ffffff";
             }
         }
         DOM.LoadBackground();
