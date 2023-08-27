@@ -1,4 +1,5 @@
 import Page from "./PageModule.js";
+import Modals from "./ModalsModule.js";
 
 window.Context = {
     AddContextMenu: (element) => AddContext(element),
@@ -20,7 +21,7 @@ PageBody.childNodes.forEach((element) => {
 
 document.addEventListener(
     "click",
-    function (e) {
+    async function (e) {
         if (i.opacity === "0") return;
 
         i.opacity = "0";
@@ -35,13 +36,12 @@ document.addEventListener(
             return;
         }
 
-        try {
-            if (e.target.tagName === "P") e.target = e.target.parentElement;
-        } catch {}
+        var Element = e.target;
+        if (e.target.tagName === "P") Element = e.target.parentElement;
 
-        console.log(e.target);
+        console.log(Element);
 
-        switch (e.target.id) {
+        switch (Element.id) {
             case "ContextLinkDelete":
                 {
                     LastElement.remove();
@@ -53,6 +53,10 @@ document.addEventListener(
                 break;
             case "ContextLinkRename":
                 {
+                    if (!Modals.IsLoaded) {
+                        await Modals.LoadModals();
+                    }
+
                     MicroModal.showOption(
                         "Rename Link",
                         '<label class="modal__label">Name</label><input id="input-modal-link-rename" class="modal__input" />',
@@ -62,7 +66,7 @@ document.addEventListener(
                     );
                     console.log(LastElement);
                     $("#input-modal-link-rename")[0].value =
-                        LastElement.firstChild.href;
+                        LastElement.firstChild.childNodes[1].textContent;
                 }
                 break;
             case "ContextLinkOpenTab":
@@ -90,7 +94,13 @@ document.addEventListener(
 );
 
 function RenameLink(data) {
-    console.log(data);
+    var Name = $("#input-modal-link-rename")[0].value;
+    Page.PageData.sections[LastElement.parentElement.id.split("-")[1]].widgets[
+        LastElement.id.split("-")[1]
+    ].name = Name;
+    Page.Save();
+
+    LastElement.firstChild.childNodes[1].textContent = Name;
 }
 
 function AddContext(element) {
