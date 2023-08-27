@@ -39,6 +39,8 @@ document.addEventListener(
             if (e.target.tagName === "P") e.target = e.target.parentElement;
         } catch {}
 
+        console.log(e.target);
+
         switch (e.target.id) {
             case "ContextLinkDelete":
                 {
@@ -47,6 +49,20 @@ document.addEventListener(
                         $(".section")[0].id.split("-")[1]
                     ].widgets[LastElement.id.split("-")[1]];
                     Page.Save();
+                }
+                break;
+            case "ContextLinkRename":
+                {
+                    MicroModal.showOption(
+                        "Rename Link",
+                        '<label class="modal__label">Name</label><input id="input-modal-link-rename" class="modal__input" />',
+                        {
+                            okTrigger: (data) => RenameLink(data),
+                        }
+                    );
+                    console.log(LastElement);
+                    $("#input-modal-link-rename")[0].value =
+                        LastElement.firstChild.href;
                 }
                 break;
             case "ContextLinkOpenTab":
@@ -73,14 +89,29 @@ document.addEventListener(
     false
 );
 
+function RenameLink(data) {
+    console.log(data);
+}
+
 function AddContext(element) {
     element.addEventListener(
         "contextmenu",
         function (e) {
-            LastElement = e.target.parentElement.parentElement;
-            if (LastElement.tagName === "A")
-                LastElement =
-                    e.target.parentElement.parentElement.parentElement;
+            LastElement = e.target;
+            switch (LastElement.tagName) {
+                case "A":
+                    LastElement = e.target.parentElement;
+                    break;
+                case "DIV":
+                case "P":
+                    LastElement = e.target.parentElement.parentElement;
+                    break;
+                case "IMG":
+                    LastElement =
+                        e.target.parentElement.parentElement.parentElement;
+                    break;
+            }
+
             var posX = e.clientX;
             var posY = e.clientY;
             menu(posX, posY);
